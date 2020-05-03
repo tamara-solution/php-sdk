@@ -1,0 +1,44 @@
+{
+  "name": "tamara-solution/php-sdk",
+  "license": "MIT",
+  "description": "Tamara PHP Client Library",
+  "keywords": [
+    "tamara",
+    "tamara php sdk",
+    "buy now, pay later",
+    "installment"
+  ],
+  "homepage": "https://github.com/tamara-solution/php-sdk",
+  "authors": [
+    {
+      "name": "Tamara Team",
+      "email": "tech@tamara.co"
+    }
+  ],
+  "require": {
+    "php": "^7.1.0",
+    "psr/http-client": "^1.0",
+    "psr/log": "^1.0",
+    "ext-json": "*",
+    "symfony/http-foundation": "^4.1",
+    "firebase/php-jwt": "^5.1"
+  },
+  "suggest": {
+    "guzzlehttp/guzzle": "^6.0"
+  },
+  "require-dev": {
+    "guzzlehttp/guzzle": "^6.0",
+    "phpunit/phpunit": "^7",
+    "roave/security-advisories": "dev-master"
+  },
+  "autoload": {
+    "psr-4": {
+      "Tamara\\": "src/Tamara"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tamara\\Tests\\": "tests/"
+    }
+  }
+}
