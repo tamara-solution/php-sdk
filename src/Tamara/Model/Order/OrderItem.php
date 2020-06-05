@@ -87,59 +87,37 @@ class OrderItem
         return $self;
     }
 
-    /**
-     * @return string
-     */
     public function getReferenceId(): string
     {
         return $this->referenceId;
     }
 
-    /**
-     * @return string
-     */
-    public function getType()
+    public function getType(): string
     {
-        return $this->type;
+        return $this->type ?? '';
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-
-    /**
-     * @return string
-     */
-    public function getSku()
+    public function getSku(): string
     {
         return $this->sku;
     }
 
-    /**
-     * @return int
-     */
-    public function getQuantity()
+    public function getQuantity(): int
     {
         return $this->quantity;
     }
 
-    /**
-     * @return Money
-     */
-    public function getTaxAmount()
+    public function getTaxAmount(): Money
     {
         return $this->taxAmount;
     }
 
-    /**
-     * @return Money
-     */
-    public function getTotalAmount()
+    public function getTotalAmount(): Money
     {
         return $this->totalAmount;
     }
@@ -147,7 +125,7 @@ class OrderItem
     /**
      * @return Money|null
      */
-    public function getUnitPrice()
+    public function getUnitPrice(): ?Money
     {
         return $this->unitPrice;
     }
@@ -155,86 +133,79 @@ class OrderItem
     /**
      * @return Money|null
      */
-    public function getDiscountAmount()
+    public function getDiscountAmount(): ?Money
     {
         return $this->discountAmount;
     }
 
-    /**
-     * @param string $referenceId
-     */
-    public function setReferenceId(string $referenceId)
+    public function setReferenceId(string $referenceId): OrderItem
     {
         $this->referenceId = $referenceId;
+
+        return $this;
     }
 
-    /**
-     * @param string $type
-     */
-    public function setType(string $type)
+    public function setType(string $type): OrderItem
     {
         $this->type = $type;
+
+        return $this;
     }
 
-    /**
-     * @param string $name
-     */
-    public function setName(string $name)
+    public function setName(string $name): OrderItem
     {
         $this->name = $name;
+
+        return $this;
     }
 
-    /**
-     * @param string $sku
-     */
-    public function setSku(string $sku)
+    public function setSku(string $sku): OrderItem
     {
         $this->sku = $sku;
+
+        return $this;
     }
 
-    /**
-     * @param int $quantity
-     */
-    public function setQuantity(int $quantity)
+    public function setQuantity(int $quantity): OrderItem
     {
         $this->quantity = $quantity;
+
+        return $this;
     }
 
-    /**
-     * @param Money $taxAmount
-     */
-    public function setTaxAmount(Money $taxAmount)
+    public function setTaxAmount(Money $taxAmount): OrderItem
     {
         $this->taxAmount = $taxAmount;
+
+        return $this;
     }
 
-    /**
-     * @param Money $totalAmount
-     */
-    public function setTotalAmount(Money $totalAmount)
+    public function setTotalAmount(Money $totalAmount): OrderItem
     {
         $this->totalAmount = $totalAmount;
+
+        return $this;
     }
 
-    /**
-     * @param Money|null $unitPrice
-     */
-    public function setUnitPrice(Money $unitPrice)
+    public function setUnitPrice(Money $unitPrice): OrderItem
     {
         $this->unitPrice = $unitPrice;
+
+        return $this;
     }
 
-    /**
-     * @param Money|null $discountAmount
-     */
-    public function setDiscountAmount(Money $discountAmount)
+    public function setDiscountAmount(Money $discountAmount): OrderItem
     {
         $this->discountAmount = $discountAmount;
+
+        return $this;
     }
 
-    public function setImageUrl(string $imageUrl): void
+    public function setImageUrl(string $imageUrl): OrderItem
     {
         $this->imageUrl = $imageUrl;
+
+        return $this;
     }
 
     public function getImageUrl(): string

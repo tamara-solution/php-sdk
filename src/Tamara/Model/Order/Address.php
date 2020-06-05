@@ -56,146 +56,111 @@ class Address
      */
     private $phoneNumber;
 
-    /**
-     * @param string $firstName
-     */
-    public function setFirstName($firstName)
+    public function setFirstName(string $firstName): Address
     {
         $this->firstName = $firstName;
+
+        return $this;
     }
 
-    /**
-     * @param string $lastName
-     */
-    public function setLastName($lastName)
+    public function setLastName(string $lastName): Address
     {
         $this->lastName = $lastName;
+
+        return $this;
     }
 
-    /**
-     * @param string $line1
-     */
-    public function setLine1($line1)
+    public function setLine1(string $line1): Address
     {
         $this->line1 = $line1;
+
+        return $this;
     }
 
-    /**
-     * @param string|null $line2
-     */
-    public function setLine2($line2)
+    public function setLine2(string $line2): Address
     {
         $this->line2 = $line2;
+
+        return $this;
     }
 
-    /**
-     * @param string $region
-     */
-    public function setRegion($region)
+    public function setRegion(string $region): Address
     {
         $this->region = $region;
+
+        return $this;
     }
 
-    /**
-     * @param string $city
-     */
-    public function setCity($city)
+    public function setCity(string $city): Address
     {
         $this->city = $city;
+
+        return $this;
     }
 
-    /**
-     * @param string $countryCode
-     */
-    public function setCountryCode($countryCode)
+    public function setCountryCode(string $countryCode): Address
     {
         $this->countryCode = $countryCode;
+
+        return $this;
     }
 
-    /**
-     * @param string|null $phoneNumber
-     */
-    public function setPhoneNumber($phoneNumber)
+    public function setPhoneNumber(string $phoneNumber): Address
     {
         $this->phoneNumber = $phoneNumber;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getFirstName()
+    public function getFirstName(): string
     {
         return $this->firstName;
     }
 
-    /**
-     * @return string
-     */
-    public function getLastName()
+    public function getLastName(): string
     {
         return $this->lastName;
     }
 
-    /**
-     * @return string
-     */
-    public function getLine1()
+    public function getLine1(): string
     {
         return $this->line1;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getLine2()
+    public function getLine2(): string
     {
-        return $this->line2;
+        return $this->line2 ?? '';
     }
 
-    /**
-     * @return string
-     */
-    public function getRegion()
+    public function getRegion(): string
     {
-        return $this->region;
+        return $this->region ?? 'N/A';
     }
 
-    /**
-     * @return string
-     */
-    public function getCity()
+    public function getCity(): string
     {
         return $this->city;
     }
 
-    /**
-     * @return string
-     */
-    public function getCountryCode()
+    public function getCountryCode(): string
     {
         return $this->countryCode;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getPhoneNumber()
+    public function getPhoneNumber(): string
     {
-        return $this->phoneNumber;
+        return $this->phoneNumber ?? '';
     }
 
-    /**
-     * @return array
-     */
-    public function toArray()
+    public function toArray(): array
     {
         return [
-            self::FIRST_NAME => $this->getFirstName(),
-            self::LAST_NAME => $this->getLastName(),
-            self::LINE1 => $this->getLine1(),
-            self::LINE2 => $this->getLine2(),
-            self::REGION => $this->getRegion(),
-            self::CITY => $this->getCity(),
+            self::FIRST_NAME   => $this->getFirstName(),
+            self::LAST_NAME    => $this->getLastName(),
+            self::LINE1        => $this->getLine1(),
+            self::LINE2        => $this->getLine2(),
+            self::REGION       => $this->getRegion(),
+            self::CITY         => $this->getCity(),
             self::COUNTRY_CODE => $this->getCountryCode(),
             self::PHONE_NUMBER => $this->getPhoneNumber(),
         ];

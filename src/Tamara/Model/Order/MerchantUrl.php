@@ -28,83 +28,64 @@ class MerchantUrl
     private $cancelUrl;
 
     /**
-     * @param string $successUrl
-     */
-    public function setSuccessUrl(string $successUrl)
-    {
-        $this->successUrl = $successUrl;
-    }
-
-    /**
-     * @param string $failureUrl
-     */
-    public function setFailureUrl(string $failureUrl)
-    {
-        $this->failureUrl = $failureUrl;
-    }
-
-    /**
-     * @param string $cancelUrl
-     */
-    public function setCancelUrl(string $cancelUrl)
-    {
-        $this->cancelUrl = $cancelUrl;
-    }
-
-    /**
-     * @param string $notificationUrl
-     */
-    public function setNotificationUrl(string $notificationUrl)
-    {
-        $this->notificationUrl = $notificationUrl;
-    }
-
-    /**
      * @var string
      */
     private $notificationUrl;
 
-    /**
-     * @return string
-     */
-    public function getSuccessUrl()
+    public function setSuccessUrl(string $successUrl): MerchantUrl
+    {
+        $this->successUrl = $successUrl;
+
+        return $this;
+    }
+
+    public function setFailureUrl(string $failureUrl): MerchantUrl
+    {
+        $this->failureUrl = $failureUrl;
+
+        return $this;
+    }
+
+    public function setCancelUrl(string $cancelUrl): MerchantUrl
+    {
+        $this->cancelUrl = $cancelUrl;
+
+        return $this;
+    }
+
+    public function setNotificationUrl(string $notificationUrl): MerchantUrl
+    {
+        $this->notificationUrl = $notificationUrl;
+
+        return $this;
+    }
+
+    public function getSuccessUrl(): string
     {
         return $this->successUrl;
     }
 
-    /**
-     * @return string
-     */
-    public function getFailureUrl()
+    public function getFailureUrl(): string
     {
         return $this->failureUrl;
     }
 
-    /**
-     * @return string
-     */
-    public function getCancelUrl()
+    public function getCancelUrl(): string
     {
         return $this->cancelUrl;
     }
 
-    /**
-     * @return string
-     */
-    public function getNotificationUrl()
+    public function getNotificationUrl(): string
     {
         return $this->notificationUrl;
     }
 
-    /**
-     * @return array
-     */
-    public function toArray()
+    public function toArray(): array
     {
         return [
-            self::SUCCESS => $this->getSuccessUrl(),
-            self::FAILURE => $this->getFailureUrl(),
-            self::CANCEL => $this->getCancelUrl(),
+            self::SUCCESS      => $this->getSuccessUrl(),
+            self::FAILURE      => $this->getFailureUrl(),
+            self::CANCEL       => $this->getCancelUrl(),
             self::NOTIFICATION => $this->getNotificationUrl(),
         ];
     }

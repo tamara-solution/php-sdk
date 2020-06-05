@@ -26,12 +26,14 @@ class OrderItemCollection implements IteratorAggregate, Countable
         return $self;
     }
 
-    public function append(OrderItem $item)
+    public function append(OrderItem $item): OrderItemCollection
     {
         $this->data[] = $item;
+
+        return $this;
     }
 
-    public function getItems()
+    public function getItems(): array
     {
         return $this->data;
     }

@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 namespace Tamara\Model\Order;
 
-use Tamara\Helper\StringHelper;
 use Tamara\Model\Money;
-use Tamara\Request\Checkout\CreateCheckoutRequest;
-use Tamara\Request\Order\CreateOrderRequest;
 
 class Order
 {
@@ -34,16 +31,6 @@ class Order
      * @var string
      */
     private $orderId;
-
-    /**
-     * @var string
-     */
-    private $merchantId;
-
-    /**
-     * @var string
-     */
-    private $customerId;
 
     /**
      * @var string
@@ -79,11 +66,6 @@ class Order
      * @var string
      */
     private $locale;
-
-    /**
-     * @var string
-     */
-    private $status;
 
     /**
      * @var OrderItemCollection
@@ -130,330 +112,211 @@ class Order
      */
     private $platform;
 
-    /**
-     * @return string
-     */
-    public function getOrderId()
+    public function getOrderId(): string
     {
         return $this->orderId;
     }
 
-    /**
-     * @param string $orderId
-     */
-    public function setOrderId(string $orderId): void
+    public function setOrderId(string $orderId): Order
     {
         $this->orderId = $orderId;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getMerchantId()
-    {
-        return $this->merchantId;
-    }
-
-    /**
-     * @param string $merchantId
-     */
-    public function setMerchantId(string $merchantId): void
-    {
-        $this->merchantId = $merchantId;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getCustomerId(): ?string
-    {
-        return $this->customerId;
-    }
-
-    /**
-     * @param string|null $customerId
-     */
-    public function setCustomerId(?string $customerId): void
-    {
-        $this->customerId = $customerId;
-    }
-
-    /**
-     * @return string
-     */
-    public function getOrderReferenceId()
+    public function getOrderReferenceId(): string
     {
         return $this->orderReferenceId;
     }
 
-    /**
-     * @param string $orderReferenceId
-     */
-    public function setOrderReferenceId(string $orderReferenceId): void
+    public function setOrderReferenceId(string $orderReferenceId): Order
     {
         $this->orderReferenceId = $orderReferenceId;
+
+        return $this;
     }
 
-    /**
-     * @return Money
-     */
-    public function getTotalAmount()
+    public function getTotalAmount(): Money
     {
         return $this->totalAmount;
     }
 
-    /**
-     * @param Money $totalAmount
-     */
-    public function setTotalAmount(Money $totalAmount): void
+    public function setTotalAmount(Money $totalAmount): Order
     {
         $this->totalAmount = $totalAmount;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getCurrency()
+    public function getCurrency(): string
     {
         return $this->currency;
     }
 
-    /**
-     * @param string $currency
-     */
-    public function setCurrency(string $currency)
+    public function setCurrency(string $currency): Order
     {
         $this->currency = $currency;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getDescription()
+    public function getDescription(): string
     {
-        return $this->description;
+        return $this->description ?? '';
     }
 
-    /**
-     * @param string $description
-     */
-    public function setDescription(string $description)
+    public function setDescription(string $description): Order
     {
         $this->description = $description;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getCountryCode()
+    public function getCountryCode(): string
     {
         return $this->countryCode;
     }
 
-    /**
-     * @param string $countryCode
-     */
-    public function setCountryCode(string $countryCode)
+    public function setCountryCode(string $countryCode): Order
     {
         $this->countryCode = $countryCode;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getPaymentType()
+    public function getPaymentType(): string
     {
         return $this->paymentType;
     }
 
-    /**
-     * @param string $paymentType
-     */
-    public function setPaymentType(string $paymentType)
+    public function setPaymentType(string $paymentType): Order
     {
         $this->paymentType = $paymentType;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getLocale()
+    public function getLocale(): string
     {
-        return $this->locale;
+        return $this->locale ?? '';
     }
 
-    /**
-     * @param string $locale
-     */
-    public function setLocale(string $locale)
+    public function setLocale(string $locale): Order
     {
         $this->locale = $locale;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    /**
-     * @param string $status
-     */
-    public function setStatus(string $status)
-    {
-        $this->status = $status;
-    }
-
-    /**
-     * @return OrderItemCollection
-     */
     public function getItems(): OrderItemCollection
     {
         return $this->items;
     }
 
-    /**
-     * @param OrderItemCollection $items
-     */
-    public function setItems(OrderItemCollection $items)
+    public function setItems(OrderItemCollection $items): Order
     {
         $this->items = $items;
+
+        return $this;
     }
 
-    /**
-     * @return Consumer
-     */
     public function getConsumer(): Consumer
     {
         return $this->consumer;
     }
 
-    /**
-     * @param Consumer $consumer
-     */
-    public function setConsumer(Consumer $consumer)
+    public function setConsumer(Consumer $consumer): Order
     {
         $this->consumer = $consumer;
+
+        return $this;
     }
 
-    /**
-     * @return Address
-     */
-    public function getBillingAddress()
+    public function getBillingAddress(): Address
     {
         return $this->billingAddress;
     }
 
-    /**
-     * @param Address $billingAddress
-     */
-    public function setBillingAddress(Address $billingAddress)
+    public function setBillingAddress(Address $billingAddress): Order
     {
         $this->billingAddress = $billingAddress;
+
+        return $this;
     }
 
-    /**
-     * @return Address
-     */
-    public function getShippingAddress()
+    public function getShippingAddress(): Address
     {
         return $this->shippingAddress;
     }
 
-    /**
-     * @param Address $shippingAddress
-     */
-    public function setShippingAddress(Address $shippingAddress)
+    public function setShippingAddress(Address $shippingAddress): Order
     {
         $this->shippingAddress = $shippingAddress;
+
+        return $this;
     }
 
-    /**
-     * @return Discount
-     */
-    public function getDiscount()
+    public function getDiscount(): Discount
     {
         return $this->discount;
     }
 
-    /**
-     * @param Discount $discount
-     */
-    public function setDiscount(Discount $discount)
+    public function setDiscount(Discount $discount): Order
     {
         $this->discount = $discount;
+
+        return $this;
     }
 
-    /**
-     * @return Money
-     */
-    public function getTaxAmount()
+    public function getTaxAmount(): Money
     {
         return $this->taxAmount;
     }
 
-    /**
-     * @param Money $taxAmount
-     */
-    public function setTaxAmount(Money $taxAmount)
+    public function setTaxAmount(Money $taxAmount): Order
     {
         $this->taxAmount = $taxAmount;
+
+        return $this;
     }
 
-    /**
-     * @return Money
-     */
-    public function getShippingAmount()
+    public function getShippingAmount(): Money
     {
         return $this->shippingAmount;
     }
 
-    /**
-     * @param Money $shippingAmount
-     */
-    public function setShippingAmount(Money $shippingAmount)
+    public function setShippingAmount(Money $shippingAmount): Order
     {
         $this->shippingAmount = $shippingAmount;
+
+        return $this;
     }
 
-    /**
-     * @return MerchantUrl
-     */
-    public function getMerchantUrl()
+    public function getMerchantUrl(): MerchantUrl
     {
         return $this->merchantUrl;
     }
 
-    /**
-     * @param MerchantUrl $merchantUrl
-     */
-    public function setMerchantUrl(MerchantUrl $merchantUrl)
+    public function setMerchantUrl(MerchantUrl $merchantUrl): Order
     {
         $this->merchantUrl = $merchantUrl;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getPlatform()
+    public function getPlatform(): string
     {
-        return $this->platform;
+        return $this->platform ?? '';
     }
 
-    /**
-     * @param string $platform
-     */
-    public function setPlatform(string $platform)
+    public function setPlatform(string $platform): Order
     {
         $this->platform = $platform;
+
+        return $this;
     }
 
-    /**
-     * @return array
-     */
-    public function toArray()
+    public function toArray(): array
     {
         return [
             self::ORDER_REFERENCE_ID => $this->getOrderReferenceId(),
@@ -473,6 +336,4 @@ class Order
             self::PLATFORM           => $this->getPlatform(),
         ];
     }
-
-
 }

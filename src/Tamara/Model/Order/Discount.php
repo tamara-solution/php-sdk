@@ -28,39 +28,31 @@ class Discount
         $this->amount = $amount;
     }
 
-    /**
-     * @param string $name
-     */
-    public function setName(string $name)
+    public function setName(string $name): Discount
     {
         $this->name = $name;
+
+        return $this;
     }
 
-    /**
-     * @param Money $amount
-     */
-    public function setAmount(Money $amount)
+    public function setAmount(Money $amount): Discount
     {
         $this->amount = $amount;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return Money
-     */
-    public function getAmount()
+    public function getAmount(): Money
     {
         return $this->amount;
     }
 
-    public function toArray()
+    public function toArray(): array
     {
         return [
             self::NAME   => $this->getName(),

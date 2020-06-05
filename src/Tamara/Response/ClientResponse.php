@@ -53,19 +53,19 @@ abstract class ClientResponse
     /**
      * @return null|string the raw content
      */
-    public function getContent(): ?string
+    public function getContent(): string
     {
-        return $this->content;
+        return $this->content ?? '';
     }
 
-    public function getMessage(): ?string
+    public function getMessage(): string
     {
-        return $this->message;
+        return $this->message ?? '';
     }
 
-    public function getErrors(): ?array
+    public function getErrors(): array
     {
-        return $this->errors;
+        return $this->errors ?? [];
     }
 
     abstract protected function parse(array $responseData): void;

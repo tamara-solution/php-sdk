@@ -50,108 +50,83 @@ class Consumer
      */
     private $isFirstOrder;
 
-    /**
-     * @param string $firstName
-     */
-    public function setFirstName($firstName)
+    public function setFirstName(string $firstName): Consumer
     {
         $this->firstName = $firstName;
+
+        return $this;
     }
 
-    /**
-     * @param string $lastName
-     */
-    public function setLastName($lastName)
+    public function setLastName(string $lastName): Consumer
     {
         $this->lastName = $lastName;
+
+        return $this;
     }
 
-    /**
-     * @param string $phoneNumber
-     */
-    public function setPhoneNumber($phoneNumber)
+    public function setPhoneNumber(string $phoneNumber): Consumer
     {
         $this->phoneNumber = $phoneNumber;
+
+        return $this;
     }
 
-    /**
-     * @param string $email
-     */
-    public function setEmail($email)
+    public function setEmail(string $email): Consumer
     {
         $this->email = $email;
+
+        return $this;
     }
 
-    /**
-     * @param string|null $nationalId
-     */
-    public function setNationalId($nationalId)
+    public function setNationalId(string $nationalId): Consumer
     {
         $this->nationalId = $nationalId;
+
+        return $this;
     }
 
-    /**
-     * @param string|null $dateOfBirth
-     */
-    public function setDateOfBirth($dateOfBirth)
+    public function setDateOfBirth(string $dateOfBirth): Consumer
     {
         $this->dateOfBirth = $dateOfBirth;
+
+        return $this;
     }
 
-    /**
-     * @param bool|null $isFirstOrder
-     */
-    public function setIsFirstOrder(?bool $isFirstOrder): void
+    public function setIsFirstOrder(bool $isFirstOrder): Consumer
     {
         $this->isFirstOrder = $isFirstOrder;
+
+        return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getFirstName()
+    public function getFirstName(): string
     {
         return $this->firstName;
     }
 
-    /**
-     * @return string
-     */
-    public function getLastName()
+    public function getLastName(): string
     {
         return $this->lastName;
     }
 
-    /**
-     * @return string
-     */
-    public function getPhoneNumber()
+    public function getPhoneNumber(): string
     {
         return $this->phoneNumber;
     }
 
-    /**
-     * @return string
-     */
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getNationalId()
+    public function getNationalId(): string
     {
-        return $this->nationalId ?? null;
+        return $this->nationalId ?? '';
     }
 
-    /**
-     * @return string|null
-     */
-    public function getDateOfBirth()
+    public function getDateOfBirth(): string
     {
-        return $this->dateOfBirth;
+        return $this->dateOfBirth ?? '';
     }
 
     /**
