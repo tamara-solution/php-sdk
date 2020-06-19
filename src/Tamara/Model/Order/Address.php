@@ -12,6 +12,7 @@ class Address
         LINE1 = 'line1',
         LINE2 = 'line2',
         REGION = 'region',
+        POSTAL_CODE = 'postal_code',
         CITY = 'city',
         COUNTRY_CODE = 'country_code',
         PHONE_NUMBER = 'phone_number';
@@ -40,6 +41,11 @@ class Address
      * @var string
      */
     private $region;
+
+    /**
+     * @var string
+     */
+    private $postalCode;
 
     /**
      * @var string
@@ -91,6 +97,13 @@ class Address
         return $this;
     }
 
+    public function setPostalCode(string $postalCode): Address
+    {
+        $this->postalCode = $postalCode;
+
+        return $this;
+    }
+
     public function setCity(string $city): Address
     {
         $this->city = $city;
@@ -134,7 +147,12 @@ class Address
 
     public function getRegion(): string
     {
-        return $this->region ?? 'N/A';
+        return $this->region ?? '';
+    }
+
+    public function getPostalCode(): string
+    {
+        return $this->postalCode ?? '';
     }
 
     public function getCity(): string
@@ -160,6 +178,7 @@ class Address
             self::LINE1        => $this->getLine1(),
             self::LINE2        => $this->getLine2(),
             self::REGION       => $this->getRegion(),
+            self::POSTAL_CODE  => $this->getPostalCode(),
             self::CITY         => $this->getCity(),
             self::COUNTRY_CODE => $this->getCountryCode(),
             self::PHONE_NUMBER => $this->getPhoneNumber(),
