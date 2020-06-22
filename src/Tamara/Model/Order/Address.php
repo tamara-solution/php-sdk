@@ -90,16 +90,16 @@ class Address
         return $this;
     }
 
-    public function setRegion(string $region): Address
+    public function setRegion(?string $region): Address
     {
-        $this->region = $region;
+        $this->region = $region ?? '';
 
         return $this;
     }
 
-    public function setPostalCode(string $postalCode): Address
+    public function setPostalCode(?string $postalCode): Address
     {
-        $this->postalCode = $postalCode;
+        $this->postalCode = $postalCode ?? '';
 
         return $this;
     }
