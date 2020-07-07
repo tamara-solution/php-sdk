@@ -11,7 +11,7 @@ class RequestFactory
     public function create(string $method, string $uri, array $params, string $apiToken): RequestInterface
     {
         $headers = [
-            'User-Agent' => sprintf('Voucher Service SDK %s', Client::VERSION),
+            'User-Agent' => sprintf('Tamara Client SDK %s', Client::VERSION),
             'Content-Type' => 'application/json',
             'Authorization' => sprintf('Bearer %s', $apiToken),
         ];
