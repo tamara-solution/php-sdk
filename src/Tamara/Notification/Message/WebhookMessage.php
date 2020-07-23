@@ -6,19 +6,20 @@ namespace Tamara\Notification\Message;
 
 use Tamara\Notification\AbstractMessage;
 
-class AuthoriseMessage extends AbstractMessage
+class WebhookMessage extends AbstractMessage
 {
-    private const ORDER_STATUS = 'order_status';
+    private const EVENT_TYPE = 'event_type';
     /**
      * @var string
      */
-    private $orderStatus;
+    private $eventType;
 
-    public function __construct(string $orderId, string $orderReferenceId, array $data, string $orderStatus)
+    public function __construct(string $orderId, string $orderReferenceId, array $data, string $eventType)
     {
         parent::__construct($orderId, $orderReferenceId, $data);
-        $this->orderStatus = $orderStatus;
+        $this->eventType = $eventType;
     }
+
 
     public static function fromArray(array $data): AbstractMessage
     {
@@ -26,12 +27,12 @@ class AuthoriseMessage extends AbstractMessage
             $data[self::ORDER_ID],
             $data[self::ORDER_REFERENCE_ID],
             $data[self::DATA],
-            $data[self::ORDER_STATUS]
+            $data[self::EVENT_TYPE]
         );
     }
 
-    public function getOrderStatus(): string
+    public function getEventType(): string
     {
-        return $this->orderStatus;
+        return $this->eventType;
     }
 }

@@ -10,13 +10,20 @@ use Tamara\Request\Order\CancelOrderRequest;
 use Tamara\Request\Payment\CaptureRequest;
 use Tamara\Request\Payment\RefundRequest;
 use Tamara\Request\RequestDispatcher;
-use Tamara\Response\ClientResponse;
+use Tamara\Request\Webhook\RegisterWebhookRequest;
+use Tamara\Request\Webhook\RemoveWebhookRequest;
+use Tamara\Request\Webhook\RetrieveWebhookRequest;
+use Tamara\Request\Webhook\UpdateWebhookRequest;
 use Tamara\Response\Order\AuthoriseOrderResponse;
 use Tamara\Response\Checkout\GetPaymentTypesResponse;
 use Tamara\Response\Checkout\CreateCheckoutResponse;
 use Tamara\Response\Payment\CancelResponse;
 use Tamara\Response\Payment\CaptureResponse;
 use Tamara\Response\Payment\RefundResponse;
+use Tamara\Response\Webhook\RegisterWebhookResponse;
+use Tamara\Response\Webhook\RemoveWebhookResponse;
+use Tamara\Response\Webhook\RetrieveWebhookResponse;
+use Tamara\Response\Webhook\UpdateWebhookResponse;
 
 class Client
 {
@@ -124,5 +131,51 @@ class Client
     public function refund(RefundRequest $refundRequest): RefundResponse
     {
         return $this->requestDispatcher->dispatch($refundRequest);
+    }
+
+    /**
+     * @param RegisterWebhookRequest $request
+     * @return RegisterWebhookResponse
+     * @throws Exception\RequestDispatcherException
+     */
+    public function registerWebhook(RegisterWebhookRequest $request): RegisterWebhookResponse
+    {
+        return $this->requestDispatcher->dispatch($request);
+    }
+
+    /**
+     * @param RetrieveWebhookRequest $request
+     *
+     * @return RetrieveWebhookResponse
+     *
+     * @throws Exception\RequestDispatcherException
+     */
+    public function retrieveWebhook(RetrieveWebhookRequest $request): RetrieveWebhookResponse
+    {
+        return $this->requestDispatcher->dispatch($request);
+    }
+
+    /**
+     * @param RemoveWebhookRequest $request
+     *
+     * @return RemoveWebhookResponse
+     *
+     * @throws Exception\RequestDispatcherException
+     */
+    public function removeWebhook(RemoveWebhookRequest $request): RemoveWebhookResponse
+    {
+        return $this->requestDispatcher->dispatch($request);
+    }
+
+    /**
+     * @param UpdateWebhookRequest $request
+     *
+     * @return UpdateWebhookResponse
+     *
+     * @throws Exception\RequestDispatcherException
+     */
+    public function updateWebhook(UpdateWebhookRequest $request): UpdateWebhookResponse
+    {
+        return $this->requestDispatcher->dispatch($request);
     }
 }

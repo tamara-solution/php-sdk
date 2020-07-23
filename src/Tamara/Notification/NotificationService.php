@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Tamara\Notification\Exception\ForbiddenException;
 use Tamara\Notification\Exception\NotificationException;
 use Tamara\Notification\Message\AuthoriseMessage;
+use Tamara\Notification\Message\WebhookMessage;
 
 class NotificationService
 {
@@ -34,6 +35,20 @@ class NotificationService
     {
         /** @var AuthoriseMessage $response */
         $response = AuthoriseMessage::fromArray($this->process());
+
+        return $response;
+    }
+
+    /**
+     * @return WebhookMessage
+     *
+     * @throws ForbiddenException
+     * @throws NotificationException
+     */
+    public function processWebhook(): WebhookMessage
+    {
+        /** @var WebhookMessage $response */
+        $response = WebhookMessage::fromArray($this->process());
 
         return $response;
     }
