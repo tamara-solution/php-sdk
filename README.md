@@ -49,5 +49,5 @@ tamarapay.client:
 ```
 
 # Notes
-- We use Guzzlehttp library for the http client transport
+- We use [Guzzlehttp](http://docs.guzzlephp.org/en/stable/) library for the http client transport
 - You can use your own transport service and just need to implement the `Psr\Http\Client\ClientInterface`
