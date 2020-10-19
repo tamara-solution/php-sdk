@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tamara\Response\Payment;
 
-use Psr\Http\Message\ResponseInterface;
 use Tamara\Response\ClientResponse;
 
 class CancelResponse extends ClientResponse
