@@ -68,10 +68,10 @@ class Address
         $self->setFirstName($data[self::FIRST_NAME]);
         $self->setLastName($data[self::LAST_NAME]);
         $self->setLine1($data[self::LINE1]);
-        $self->setLine2($data[self::LINE2]);
-        $self->setRegion($data[self::REGION]);
-        $self->setPostalCode($data[self::POSTAL_CODE]);
-        $self->setCity($data[self::CITY]);
+        $self->setLine2($data[self::LINE2] ?? '');
+        $self->setRegion($data[self::REGION] ?? '');
+        $self->setPostalCode($data[self::POSTAL_CODE] ?? '');
+        $self->setCity($data[self::CITY] ?? '');
         $self->setCountryCode($data[self::COUNTRY_CODE]);
         $self->setPhoneNumber($data[self::PHONE_NUMBER]);
 

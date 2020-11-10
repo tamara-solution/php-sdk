@@ -57,9 +57,9 @@ class Consumer
         $self->setLastName($data[self::LAST_NAME]);
         $self->setPhoneNumber($data[self::PHONE_NUMBER]);
         $self->setEmail($data[self::EMAIL]);
-        $self->setNationalId($data[self::NATIONAL_ID]);
-        $self->setDateOfBirth($data[self::DATE_OF_BIRTH]);
-        $self->setIsFirstOrder($data[self::IS_FIRST_ORDER]);
+        $self->setNationalId($data[self::NATIONAL_ID] ?? '');
+        $self->setDateOfBirth($data[self::DATE_OF_BIRTH] ?? '');
+        $self->setIsFirstOrder((bool) $data[self::IS_FIRST_ORDER]);
 
         return $self;
     }
@@ -143,17 +143,11 @@ class Consumer
         return $this->dateOfBirth ?? '';
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getIsFirstOrder(): ?bool
+    public function getIsFirstOrder(): bool
     {
-        return $this->isFirstOrder;
+        return $this->isFirstOrder ?? false;
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         return [

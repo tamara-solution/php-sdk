@@ -75,9 +75,9 @@ class OrderItem
         $self = new self();
         $self->setName($data[self::NAME]);
         $self->setReferenceId($data[self::REFERENCE_ID]);
-        $self->setSku($data[self::SKU]);
-        $self->setType($data[self::TYPE]);
-        $self->setQuantity($data[self::QUANTITY]);
+        $self->setSku($data[self::SKU] ?? '');
+        $self->setType($data[self::TYPE] ?? '');
+        $self->setQuantity((int) $data[self::QUANTITY]);
         $self->setUnitPrice(Money::fromArray($data[self::UNIT_PRICE]));
         $self->setTotalAmount(Money::fromArray($data[self::TOTAL_AMOUNT]));
         $self->setTaxAmount(Money::fromArray($data[self::TAX_AMOUNT]));

@@ -2,7 +2,7 @@
   "name": "tamara-solution/php-sdk",
   "license": "MIT",
   "description": "Tamara PHP Client Library",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "keywords": [
     "tamara",
     "tamara php sdk",
