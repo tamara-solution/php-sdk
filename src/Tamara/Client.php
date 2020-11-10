@@ -7,6 +7,7 @@ use Tamara\Request\Order\AuthoriseOrderRequest;
 use Tamara\Request\Checkout\CreateCheckoutRequest;
 use Tamara\Request\Checkout\GetPaymentTypesRequest;
 use Tamara\Request\Order\CancelOrderRequest;
+use Tamara\Request\Order\GetOrderByReferenceIdRequest;
 use Tamara\Request\Order\UpdateReferenceIdRequest;
 use Tamara\Request\Payment\CaptureRequest;
 use Tamara\Request\Payment\RefundRequest;
@@ -18,6 +19,7 @@ use Tamara\Request\Webhook\UpdateWebhookRequest;
 use Tamara\Response\Order\AuthoriseOrderResponse;
 use Tamara\Response\Checkout\GetPaymentTypesResponse;
 use Tamara\Response\Checkout\CreateCheckoutResponse;
+use Tamara\Response\Order\GetOrderByReferenceIdResponse;
 use Tamara\Response\Order\UpdateReferenceIdResponse;
 use Tamara\Response\Payment\CancelResponse;
 use Tamara\Response\Payment\CaptureResponse;
@@ -189,6 +191,18 @@ class Client
      * @throws Exception\RequestDispatcherException
      */
     public function updateOrderReferenceId(UpdateReferenceIdRequest $request): UpdateReferenceIdResponse
+    {
+        return $this->requestDispatcher->dispatch($request);
+    }
+
+    /**
+     * @param GetOrderByReferenceIdRequest $request
+     *
+     * @return GetOrderByReferenceIdResponse
+     *
+     * @throws Exception\RequestDispatcherException
+     */
+    public function getOrderByReferenceId(GetOrderByReferenceIdRequest $request): GetOrderByReferenceIdResponse
     {
         return $this->requestDispatcher->dispatch($request);
     }

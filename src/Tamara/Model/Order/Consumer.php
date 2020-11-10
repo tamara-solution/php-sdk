@@ -50,6 +50,20 @@ class Consumer
      */
     private $isFirstOrder;
 
+    public static function fromArray(array $data): Consumer
+    {
+        $self = new self();
+        $self->setFirstName($data[self::FIRST_NAME]);
+        $self->setLastName($data[self::LAST_NAME]);
+        $self->setPhoneNumber($data[self::PHONE_NUMBER]);
+        $self->setEmail($data[self::EMAIL]);
+        $self->setNationalId($data[self::NATIONAL_ID]);
+        $self->setDateOfBirth($data[self::DATE_OF_BIRTH]);
+        $self->setIsFirstOrder($data[self::IS_FIRST_ORDER]);
+
+        return $self;
+    }
+
     public function setFirstName(string $firstName): Consumer
     {
         $this->firstName = $firstName;

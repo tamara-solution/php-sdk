@@ -28,6 +28,11 @@ class Discount
         $this->amount = $amount;
     }
 
+    public static function fromArray(array $data): Discount
+    {
+        return new self($data[self::NAME], Money::fromArray($data[self::AMOUNT]));
+    }
+
     public function setName(string $name): Discount
     {
         $this->name = $name;
