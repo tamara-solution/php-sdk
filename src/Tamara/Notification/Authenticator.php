@@ -11,7 +11,9 @@ use Throwable;
 
 class Authenticator
 {
-    private const AUTHORIZATION = 'Authorization';
+    private const
+        AUTHORIZATION = 'Authorization',
+        TOKEN = 'tamaraToken';
     /**
      * @var string
      */
@@ -29,14 +31,16 @@ class Authenticator
      */
     public function authenticate(Request $request): void
     {
-        if (!$request->headers->has(self::AUTHORIZATION)) {
+        if (!$request->headers->has(self::AUTHORIZATION) && !$request->get(self::TOKEN)) {
             throw new ForbiddenException('Access denied.');
         }
 
-        $token = $this->getBearerToken($request->headers->get(self::AUTHORIZATION));
+        $token = $request->headers->get(self::AUTHORIZATION)
+            ? $this->getBearerToken($request->headers->get(self::AUTHORIZATION))
+            : $request->get(self::TOKEN);
 
         try {
-            $tokenData = $this->decode($token);
+            $this->decode($token);
         } catch (Throwable $exception) {
             throw new ForbiddenException('Access denied.');
         }
