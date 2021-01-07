@@ -3,15 +3,14 @@
 namespace Tamara\HttpClient;
 
 use GuzzleHttp\ClientInterface as GuzzleHttpClient;
-use GuzzleHttp\Exception\RequestException as GuzzleRequestException;
 use GuzzleHttp\Exception\GuzzleException;
-use GuzzleHttp\TransferStats;
+use GuzzleHttp\Exception\RequestException as GuzzleRequestException;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
-use Throwable;
 use Tamara\Exception\RequestException;
+use Throwable;
 
 class GuzzleHttpAdapter implements ClientInterface
 {
@@ -66,8 +65,8 @@ class GuzzleHttpAdapter implements ClientInterface
             throw new RequestException(
                 $exception->getMessage(),
                 $exception->getCode(),
-                $exception->getRequest(),
-                $exception->getResponse(),
+                $request,
+                $exception instanceof GuzzleException ? $exception->getResponse() : null,
                 $exception->getPrevious()
             );
         }
