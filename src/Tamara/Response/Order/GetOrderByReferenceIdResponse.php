@@ -221,6 +221,11 @@ class GetOrderByReferenceIdResponse extends ClientResponse
         return $this->createdAt;
     }
 
+    public function getTransactions(): Transactions
+    {
+        return $this->transactions;
+    }
+
     protected function parse(array $responseData): void
     {
         $settlementDate = !empty($responseData[self::SETTLEMENT_DATE])

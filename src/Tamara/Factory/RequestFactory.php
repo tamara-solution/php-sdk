@@ -2,7 +2,6 @@
 
 namespace Tamara\Factory;
 
-use GuzzleHttp\Psr7\Request;
 use Psr\Http\Message\RequestInterface;
 use Tamara\Client;
 
@@ -16,11 +15,24 @@ class RequestFactory
             'Authorization' => sprintf('Bearer %s', $apiToken),
         ];
 
-        return new Request(
-            $method,
-            $uri,
-            $headers,
-            json_encode($params)
-        );
+        if (class_exists(\GuzzleHttp\Psr7\Request::class)) {
+            return new \GuzzleHttp\Psr7\Request(
+                $method,
+                $uri,
+                $headers,
+                json_encode($params)
+            );
+        }
+
+        if (class_exists(\Nyholm\Psr7\Request::class)) {
+            return new \Nyholm\Psr7\Request(
+                $method,
+                $uri,
+                $headers,
+                json_encode($params)
+            );
+        }
+
+        throw new \RuntimeException('PSR7 Request is not supported.');
     }
 }

@@ -2,23 +2,17 @@
 
 namespace Tamara\HttpClient;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\ClientInterface as GuzzleHttpClient;
-use GuzzleHttp\Exception\GuzzleException;
-use GuzzleHttp\Exception\RequestException as GuzzleRequestException;
+use Buzz\Client\Curl;
+use Nyholm\Psr7\Factory\Psr17Factory;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use Tamara\Exception\RequestException;
-use Throwable;
 
-class GuzzleHttpAdapter implements ClientInterface
+class NyholmHttpAdapter implements ClientInterface
 {
-    /**
-     * @var GuzzleHttpClient
-     */
-    protected $client;
+    private $client;
 
     /**
      * @var int
@@ -30,34 +24,24 @@ class GuzzleHttpAdapter implements ClientInterface
      */
     protected $logger;
 
-    /**
-     * @param int                  $requestTimeout
-     * @param LoggerInterface|null $logger
-     */
     public function __construct(int $requestTimeout, LoggerInterface $logger = null)
     {
-        $this->client = new Client();
         $this->requestTimeout = $requestTimeout;
         $this->logger = $logger;
+        $this->client = new Curl(new Psr17Factory());
     }
 
-    /**
-     * @param RequestInterface $request
-     *
-     * @return ResponseInterface
-     *
-     * @throws RequestException
-     */
+
     public function sendRequest(RequestInterface $request): ResponseInterface
     {
         try {
-            return $this->client->send(
+            return $this->client->sendRequest(
                 $request,
                 [
                     'timeout' => $this->requestTimeout,
                 ]
             );
-        } catch (Throwable | GuzzleException | GuzzleRequestException $exception) {
+        } catch (\Throwable $exception) {
             if (null !== $this->logger) {
                 $this->logger->error($exception->getMessage(), $exception->getTrace());
             }
@@ -66,7 +50,7 @@ class GuzzleHttpAdapter implements ClientInterface
                 $exception->getMessage(),
                 $exception->getCode(),
                 $request,
-                $exception instanceof GuzzleException ? $exception->getResponse() : null,
+                null,
                 $exception->getPrevious()
             );
         }
