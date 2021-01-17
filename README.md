@@ -49,5 +49,5 @@ tamarapay.client:
 ```
 
 # Notes
-- We use [Guzzlehttp](http://docs.guzzlephp.org/en/stable/) library for the http client transport
-- You can use your own transport service and just need to implement the `Psr\Http\Client\ClientInterface`
+- We use [Guzzlehttp](http://docs.guzzlephp.org/en/stable/) library as the default http client transport and [Nyholm http](https://github.com/Nyholm/psr7) as a backup 
+- You can use your own transport service and just need to implement the `Tamara\HttpClient\ClientInterface` and pass it to `Configuration::create` function

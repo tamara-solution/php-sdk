@@ -4,7 +4,6 @@ namespace Tamara\HttpClient;
 
 use Buzz\Client\Curl;
 use Nyholm\Psr7\Factory\Psr17Factory;
-use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
@@ -31,6 +30,21 @@ class NyholmHttpAdapter implements ClientInterface
         $this->client = new Curl(new Psr17Factory());
     }
 
+    /** {@inheritDoc} */
+    public function createRequest(
+        string $method,
+        $uri,
+        array $headers = [],
+        $body = null,
+        $version = '1.1'
+    ): RequestInterface {
+        return new \Nyholm\Psr7\Request(
+            $method,
+            $uri,
+            $headers,
+            $body
+        );
+    }
 
     public function sendRequest(RequestInterface $request): ResponseInterface
     {

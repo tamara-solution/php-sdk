@@ -3,9 +3,9 @@
 namespace Tamara;
 
 use Tamara\HttpClient\HttpClient;
-use Tamara\Request\Order\AuthoriseOrderRequest;
 use Tamara\Request\Checkout\CreateCheckoutRequest;
 use Tamara\Request\Checkout\GetPaymentTypesRequest;
+use Tamara\Request\Order\AuthoriseOrderRequest;
 use Tamara\Request\Order\CancelOrderRequest;
 use Tamara\Request\Order\GetOrderByReferenceIdRequest;
 use Tamara\Request\Order\UpdateReferenceIdRequest;
@@ -16,9 +16,9 @@ use Tamara\Request\Webhook\RegisterWebhookRequest;
 use Tamara\Request\Webhook\RemoveWebhookRequest;
 use Tamara\Request\Webhook\RetrieveWebhookRequest;
 use Tamara\Request\Webhook\UpdateWebhookRequest;
-use Tamara\Response\Order\AuthoriseOrderResponse;
-use Tamara\Response\Checkout\GetPaymentTypesResponse;
 use Tamara\Response\Checkout\CreateCheckoutResponse;
+use Tamara\Response\Checkout\GetPaymentTypesResponse;
+use Tamara\Response\Order\AuthoriseOrderResponse;
 use Tamara\Response\Order\GetOrderByReferenceIdResponse;
 use Tamara\Response\Order\UpdateReferenceIdResponse;
 use Tamara\Response\Payment\CancelResponse;
@@ -34,7 +34,7 @@ class Client
     /**
      * @var string
      */
-    public const VERSION = '1.0.0';
+    public const VERSION = '1.2.6';
 
     /**
      * @var HttpClient

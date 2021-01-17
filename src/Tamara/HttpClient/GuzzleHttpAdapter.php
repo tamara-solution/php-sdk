@@ -6,7 +6,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface as GuzzleHttpClient;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException as GuzzleRequestException;
-use Psr\Http\Client\ClientInterface;
+use GuzzleHttp\Psr7\Request;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
@@ -31,7 +31,7 @@ class GuzzleHttpAdapter implements ClientInterface
     protected $logger;
 
     /**
-     * @param int                  $requestTimeout
+     * @param int $requestTimeout
      * @param LoggerInterface|null $logger
      */
     public function __construct(int $requestTimeout, LoggerInterface $logger = null)
@@ -39,6 +39,22 @@ class GuzzleHttpAdapter implements ClientInterface
         $this->client = new Client();
         $this->requestTimeout = $requestTimeout;
         $this->logger = $logger;
+    }
+
+    /** {@inheritDoc} */
+    public function createRequest(
+        string $method,
+        $uri,
+        array $headers = [],
+        $body = null,
+        $version = '1.1'
+    ): RequestInterface {
+        return new Request(
+            $method,
+            $uri,
+            $headers,
+            $body
+        );
     }
 
     /**

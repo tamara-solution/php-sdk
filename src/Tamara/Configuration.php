@@ -4,10 +4,8 @@ namespace Tamara;
 
 use Psr\Http\Client\ClientInterface;
 use Psr\Log\LoggerInterface;
-use Tamara\Factory\RequestFactory;
-use Tamara\HttpClient\GuzzleHttpAdapter;
+use Tamara\HttpClient\AdapterFactory;
 use Tamara\HttpClient\HttpClient;
-use Tamara\HttpClient\NyholmHttpAdapter;
 
 class Configuration
 {
@@ -90,8 +88,7 @@ class Configuration
         return new HttpClient(
             $this->getApiUrl(),
             $this->getApiToken(),
-            $transport,
-            new RequestFactory()
+            $transport
         );
     }
 
@@ -124,7 +121,7 @@ class Configuration
      */
     public function getLogger(): ?LoggerInterface
     {
-        return $this->logger;
+        return $this->logger ?? null;
     }
 
     /**
@@ -132,6 +129,6 @@ class Configuration
      */
     protected function createDefaultTransport(): ClientInterface
     {
-        return new GuzzleHttpAdapter($this->getApiRequestTimeout(), $this->logger);
+        return AdapterFactory::create($this->getApiRequestTimeout(), $this->getLogger());
     }
 }

@@ -3,10 +3,9 @@
 namespace Tamara\HttpClient;
 
 use Psr\Http\Client\ClientExceptionInterface;
-use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\ResponseInterface;
+use Tamara\Client;
 use Tamara\Exception\RequestException;
-use Tamara\Factory\RequestFactory;
 
 class HttpClient
 {
@@ -26,26 +25,18 @@ class HttpClient
     private $transport;
 
     /**
-     * @var RequestFactory
-     */
-    private $requestFactory;
-
-    /**
-     * @param string $apiUrl
-     * @param string $apiToken
+     * @param string          $apiUrl
+     * @param string          $apiToken
      * @param ClientInterface $transport
-     * @param RequestFactory $requestFactory
      */
     public function __construct(
         string $apiUrl,
         string $apiToken,
-        ClientInterface $transport,
-        RequestFactory $requestFactory
+        ClientInterface $transport
     ) {
         $this->apiUrl = $apiUrl;
         $this->apiToken = $apiToken;
         $this->transport = $transport;
-        $this->requestFactory = $requestFactory;
     }
 
     /**
@@ -111,7 +102,18 @@ class HttpClient
             $path = $this->prepareQueryString($path, $params);
         }
 
-        $request = $this->requestFactory->create($method, $this->prepareUrl($path), $params, $this->apiToken);
+        $headers = [
+            'User-Agent'    => sprintf('Tamara Client SDK %s', Client::VERSION),
+            'Content-Type'  => 'application/json',
+            'Authorization' => sprintf('Bearer %s', $this->apiToken),
+        ];
+
+        $request = $this->transport->createRequest(
+            $method,
+            $this->prepareUrl($path),
+            $headers,
+            json_encode($params)
+        );
 
         try {
             return $this->transport->sendRequest($request);
