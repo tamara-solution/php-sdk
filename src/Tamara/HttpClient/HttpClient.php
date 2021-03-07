@@ -103,7 +103,7 @@ class HttpClient
         }
 
         $headers = [
-            'User-Agent'    => sprintf('Tamara Client SDK %s', Client::VERSION),
+            'User-Agent'    => sprintf('Tamara Client SDK %s, PHP version %s', Client::VERSION, phpversion()),
             'Content-Type'  => 'application/json',
             'Authorization' => sprintf('Bearer %s', $this->apiToken),
         ];
