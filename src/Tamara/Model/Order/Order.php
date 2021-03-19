@@ -25,7 +25,8 @@ class Order
         COUNTRY_CODE = 'country_code',
         LOCALE = 'locale',
         PLATFORM = 'platform',
-        DISCOUNT_AMOUNT = 'discount_amount';
+        DISCOUNT_AMOUNT = 'discount_amount',
+        RISK_ASSESSMENT = 'risk_assessment';
 
     /**
      * @var string
@@ -111,6 +112,11 @@ class Order
      * @var string the platform that the merchant is using such as Magento, OpenCart...
      */
     private $platform;
+
+    /**
+     * @var RiskAssessment
+     */
+    private $riskAssessment;
 
     public function getOrderId(): string
     {
@@ -316,6 +322,18 @@ class Order
         return $this;
     }
 
+    public function getRiskAssessment(): RiskAssessment
+    {
+        return $this->riskAssessment ?? new RiskAssessment([]);
+    }
+
+    public function setRiskAssessment(RiskAssessment $riskAssessment): Order
+    {
+        $this->riskAssessment = $riskAssessment;
+
+        return $this;
+    }
+
     public function toArray(): array
     {
         return [
@@ -334,6 +352,7 @@ class Order
             self::SHIPPING_AMOUNT    => $this->getShippingAmount()->toArray(),
             self::MERCHANT_URL       => $this->getMerchantUrl()->toArray(),
             self::PLATFORM           => $this->getPlatform(),
+            self::RISK_ASSESSMENT    => $this->getRiskAssessment()->getData(),
         ];
     }
 }
