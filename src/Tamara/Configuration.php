@@ -22,7 +22,7 @@ class Configuration
     /**
      * @var int in seconds
      */
-    protected $apiRequestTimeout = 30;
+    protected $apiRequestTimeout = 120;
 
     /**
      * @var ClientInterface
