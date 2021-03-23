@@ -34,7 +34,7 @@ class Client
     /**
      * @var string
      */
-    public const VERSION = '1.2.13';
+    public const VERSION = '1.2.14';
 
     /**
      * @var HttpClient
