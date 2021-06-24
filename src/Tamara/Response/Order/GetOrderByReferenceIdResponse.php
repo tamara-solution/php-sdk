@@ -8,6 +8,7 @@ use Tamara\Model\Money;
 use Tamara\Model\Order\Address;
 use Tamara\Model\Order\Consumer;
 use Tamara\Model\Order\Discount;
+use Tamara\Model\Order\Order;
 use Tamara\Model\Order\OrderItemCollection;
 use Tamara\Model\Order\Transactions;
 use Tamara\Response\ClientResponse;
@@ -75,6 +76,11 @@ class GetOrderByReferenceIdResponse extends ClientResponse
      * @var Money
      */
     private $totalAmount;
+
+    /**
+     * @var null|int
+     */
+    private $instalments = null;
 
     /**
      * @var Money
@@ -226,11 +232,16 @@ class GetOrderByReferenceIdResponse extends ClientResponse
         return $this->transactions;
     }
 
+    public function getInstalments(): ?int
+    {
+        return $this->instalments;
+    }
+
     protected function parse(array $responseData): void
     {
         $settlementDate = !empty($responseData[self::SETTLEMENT_DATE])
-                          ? new DateTimeImmutable($responseData[self::SETTLEMENT_DATE])
-                          : null;
+            ? new DateTimeImmutable($responseData[self::SETTLEMENT_DATE])
+            : null;
 
         $this->orderId = $responseData[self::ORDER_ID];
         $this->orderReferenceId = $responseData[self::ORDER_REFERENCE_ID];
@@ -246,11 +257,11 @@ class GetOrderByReferenceIdResponse extends ClientResponse
         $this->shippingAmount = Money::fromArray($responseData[self::SHIPPING_AMOUNT]);
         $this->discountAmount = Discount::fromArray($responseData[self::DISCOUNT_AMOUNT]);
         $this->canceledAmount = Money::fromArray($responseData[self::CANCELED_AMOUNT]);
-        $this->items =  OrderItemCollection::create($responseData[self::ITEMS]);
+        $this->items = OrderItemCollection::create($responseData[self::ITEMS]);
         $this->settlementStatus = $responseData[self::SETTLEMENT_STATUS] ?? '';
         $this->settlementDate = $settlementDate;
         $this->createdAt = new DateTimeImmutable($responseData[self::CREATED_AT]);
         $this->transactions = Transactions::fromArray($responseData[self::TRANSACTIONS]);
+        $this->instalments = $responseData[Order::INSTALMENTS] ?? null;
     }
-
 }

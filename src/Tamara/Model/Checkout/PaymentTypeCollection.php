@@ -8,6 +8,7 @@ use ArrayIterator;
 use Countable;
 use IteratorAggregate;
 use Tamara\Model\Money;
+use Tamara\Model\Order\Order;
 
 class PaymentTypeCollection implements IteratorAggregate, Countable
 {
@@ -32,7 +33,8 @@ class PaymentTypeCollection implements IteratorAggregate, Countable
                 $paymentType[self::NAME],
                 $paymentType[self::DESCRIPTION],
                 new Money((float) $minLimit[Money::AMOUNT], $minLimit[Money::CURRENCY]),
-                new Money((float) $maxLimit[Money::AMOUNT], $maxLimit[Money::CURRENCY])
+                new Money((float) $maxLimit[Money::AMOUNT], $maxLimit[Money::CURRENCY]),
+                $this->parseSupportedInstalments($paymentType)
             );
         }
     }
@@ -48,5 +50,26 @@ class PaymentTypeCollection implements IteratorAggregate, Countable
     public function count(): int
     {
         return count($this->data);
+    }
+
+    private function parseSupportedInstalments(array $data): array
+    {
+        $result = [];
+        if (isset($data[PaymentType::SUPPORTED_INSTALMENTS]) && !empty($data[PaymentType::SUPPORTED_INSTALMENTS])) {
+            foreach ($data[PaymentType::SUPPORTED_INSTALMENTS] as $item) {
+                $minLimit = $item[self::MIN_LIMIT];
+                $maxLimit = $item[self::MAX_LIMIT];
+
+                $instalment = new Instalment(
+                    (int) $item[Order::INSTALMENTS],
+                    new Money((float) $minLimit[Money::AMOUNT], $minLimit[Money::CURRENCY]),
+                    new Money((float) $maxLimit[Money::AMOUNT], $maxLimit[Money::CURRENCY])
+                );
+
+                $result[] = $instalment;
+            }
+        }
+
+        return $result;
     }
 }

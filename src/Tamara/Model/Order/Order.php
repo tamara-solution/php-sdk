@@ -26,7 +26,10 @@ class Order
         LOCALE = 'locale',
         PLATFORM = 'platform',
         DISCOUNT_AMOUNT = 'discount_amount',
-        RISK_ASSESSMENT = 'risk_assessment';
+        RISK_ASSESSMENT = 'risk_assessment',
+        INSTALMENTS = 'instalments',
+        PAY_BY_INSTALMENTS = 'PAY_BY_INSTALMENTS',
+        PAY_BY_LATER = 'PAY_BY_LATER';
 
     /**
      * @var string
@@ -62,6 +65,11 @@ class Order
      * @var string
      */
     private $paymentType;
+
+    /**
+     * @var null|int
+     */
+    private $instalments = null;
 
     /**
      * @var string
@@ -202,6 +210,18 @@ class Order
         return $this;
     }
 
+    public function getInstalments(): ?int
+    {
+        return $this->isInstalments() ? $this->instalments : null;
+    }
+
+    public function setInstalments(?int $instalments): Order
+    {
+        $this->instalments = $instalments;
+
+        return $this;
+    }
+
     public function getLocale(): string
     {
         return $this->locale ?? '';
@@ -334,9 +354,14 @@ class Order
         return $this;
     }
 
+    public function isInstalments(): bool
+    {
+        return self::PAY_BY_INSTALMENTS === $this->getPaymentType();
+    }
+
     public function toArray(): array
     {
-        return [
+        $result = [
             self::ORDER_REFERENCE_ID => $this->getOrderReferenceId(),
             self::TOTAL_AMOUNT       => $this->getTotalAmount()->toArray(),
             self::DESCRIPTION        => $this->getDescription(),
@@ -354,5 +379,11 @@ class Order
             self::PLATFORM           => $this->getPlatform(),
             self::RISK_ASSESSMENT    => $this->getRiskAssessment()->getData(),
         ];
+
+        if ($this->getInstalments() > 0 && $this->isInstalments()) {
+            $result[self::INSTALMENTS] = $this->getInstalments();
+        }
+
+        return $result;
     }
 }

@@ -10,21 +10,33 @@ class PaymentType
 {
     public const
         NAME = 'name',
-        DESCRIPTION ='description',
+        DESCRIPTION = 'description',
         MIN_LIMIT = 'min_limit',
-        MAX_LIMIT = 'max_limit';
+        MAX_LIMIT = 'max_limit',
+        SUPPORTED_INSTALMENTS = 'supported_instalments';
 
     private $name;
     private $description;
     private $minLimit;
     private $maxLimit;
 
-    public function __construct(string $name, string $description, Money $minLimit, Money $maxLimit)
-    {
+    /**
+     * @var Instalment[]
+     */
+    private $supportedInstalments;
+
+    public function __construct(
+        string $name,
+        string $description,
+        Money $minLimit,
+        Money $maxLimit,
+        array $supportedInstalments = []
+    ) {
         $this->name = $name;
         $this->description = $description;
         $this->minLimit = $minLimit;
         $this->maxLimit = $maxLimit;
+        $this->supportedInstalments = $supportedInstalments;
     }
 
     public function getName(): string
@@ -47,13 +59,29 @@ class PaymentType
         return $this->maxLimit;
     }
 
+    /**
+     * @return Instalment[]
+     */
+    public function getSupportedInstalments(): array
+    {
+        return $this->supportedInstalments;
+    }
+
     public function toArray(): array
     {
-        return [
-            self::NAME => $this->getName(),
+        $result = [
+            self::NAME        => $this->getName(),
             self::DESCRIPTION => $this->getDescription(),
-            self::MIN_LIMIT => $this->getMinLimit()->toArray(),
-            self::MAX_LIMIT => $this->getMaxLimit()->toArray(),
+            self::MIN_LIMIT   => $this->getMinLimit()->toArray(),
+            self::MAX_LIMIT   => $this->getMaxLimit()->toArray(),
         ];
+
+        if (!empty($this->getSupportedInstalments())) {
+            foreach ($this->getSupportedInstalments() as $instalment) {
+                $result[self::SUPPORTED_INSTALMENTS][] = $instalment->toArray();
+            }
+        }
+
+        return $result;
     }
 }
