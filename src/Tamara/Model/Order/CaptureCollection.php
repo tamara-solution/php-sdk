@@ -8,7 +8,7 @@ use ArrayIterator;
 class CaptureCollection
 {
     /**
-     * @var CancelItem[]
+     * @var CaptureItem[]
      */
     private $data = [];
 
