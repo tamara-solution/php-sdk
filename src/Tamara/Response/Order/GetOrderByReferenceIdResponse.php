@@ -19,6 +19,7 @@ class GetOrderByReferenceIdResponse extends ClientResponse
     private const
         ORDER_ID = 'order_id',
         ORDER_REFERENCE_ID = 'order_reference_id',
+        ORDER_NUMBER = 'order_number',
         CONSUMER = 'consumer',
         STATUS = 'status',
         BILLING_ADDRESS = 'billing_address',
@@ -46,6 +47,11 @@ class GetOrderByReferenceIdResponse extends ClientResponse
      * @var string
      */
     private $orderReferenceId;
+
+    /**
+     * @var string
+     */
+    private $orderNumber;
 
     /**
      * @var Consumer
@@ -147,6 +153,11 @@ class GetOrderByReferenceIdResponse extends ClientResponse
         return $this->orderReferenceId;
     }
 
+    public function getOrderNumber(): string
+    {
+        return $this->orderNumber;
+    }
+
     public function getConsumer(): Consumer
     {
         return $this->consumer;
@@ -245,6 +256,7 @@ class GetOrderByReferenceIdResponse extends ClientResponse
 
         $this->orderId = $responseData[self::ORDER_ID];
         $this->orderReferenceId = $responseData[self::ORDER_REFERENCE_ID];
+        $this->orderNumber = $responseData[self::ORDER_NUMBER] ?? $this->orderReferenceId;
         $this->consumer = Consumer::fromArray($responseData[self::CONSUMER]);
         $this->status = $responseData[self::STATUS];
         $this->billingAddress = Address::fromArray($responseData[self::BILLING_ADDRESS]);

@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 namespace Tamara\Model\Order;
+
 use ArrayIterator;
 
 class CaptureCollection
@@ -26,7 +27,6 @@ class CaptureCollection
     {
         $ret = [];
 
-        /** @var CaptureItem $item */
         foreach ($this->data as $item) {
             $ret[] = $item->toArray();
         }

@@ -21,6 +21,7 @@ class Order
         MERCHANT_URL = 'merchant_url',
         PAYMENT_TYPE = 'payment_type',
         ORDER_REFERENCE_ID = 'order_reference_id',
+        ORDER_NUMBER = 'order_number',
         DESCRIPTION = 'description',
         COUNTRY_CODE = 'country_code',
         LOCALE = 'locale',
@@ -40,6 +41,11 @@ class Order
      * @var string
      */
     private $orderReferenceId;
+
+    /**
+     * @var string
+     */
+    private $orderNumber;
 
     /**
      * @var Money
@@ -146,6 +152,18 @@ class Order
     public function setOrderReferenceId(string $orderReferenceId): Order
     {
         $this->orderReferenceId = $orderReferenceId;
+
+        return $this;
+    }
+
+    public function getOrderNumber(): string
+    {
+        return $this->orderNumber ?? $this->getOrderReferenceId();
+    }
+
+    public function setOrderNumber(string $orderNumber): Order
+    {
+        $this->orderNumber = $orderNumber;
 
         return $this;
     }
@@ -363,6 +381,7 @@ class Order
     {
         $result = [
             self::ORDER_REFERENCE_ID => $this->getOrderReferenceId(),
+            self::ORDER_NUMBER       => $this->getOrderNumber(),
             self::TOTAL_AMOUNT       => $this->getTotalAmount()->toArray(),
             self::DESCRIPTION        => $this->getDescription(),
             self::COUNTRY_CODE       => $this->getCountryCode(),
