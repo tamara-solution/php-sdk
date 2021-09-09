@@ -8,6 +8,7 @@ use Tamara\Request\Checkout\GetPaymentTypesRequest;
 use Tamara\Request\Order\AuthoriseOrderRequest;
 use Tamara\Request\Order\CancelOrderRequest;
 use Tamara\Request\Order\GetOrderByReferenceIdRequest;
+use Tamara\Request\Order\GetOrderRequest;
 use Tamara\Request\Order\UpdateReferenceIdRequest;
 use Tamara\Request\Payment\CaptureRequest;
 use Tamara\Request\Payment\RefundRequest;
@@ -20,6 +21,7 @@ use Tamara\Response\Checkout\CreateCheckoutResponse;
 use Tamara\Response\Checkout\GetPaymentTypesResponse;
 use Tamara\Response\Order\AuthoriseOrderResponse;
 use Tamara\Response\Order\GetOrderByReferenceIdResponse;
+use Tamara\Response\Order\GetOrderResponse;
 use Tamara\Response\Order\UpdateReferenceIdResponse;
 use Tamara\Response\Payment\CancelResponse;
 use Tamara\Response\Payment\CaptureResponse;
@@ -34,7 +36,7 @@ class Client
     /**
      * @var string
      */
-    public const VERSION = '1.2.14';
+    public const VERSION = '1.3.3';
 
     /**
      * @var HttpClient
@@ -203,6 +205,20 @@ class Client
      * @throws Exception\RequestDispatcherException
      */
     public function getOrderByReferenceId(GetOrderByReferenceIdRequest $request): GetOrderByReferenceIdResponse
+    {
+        return $this->requestDispatcher->dispatch($request);
+    }
+
+    /**
+     * Get order details by tamara order id
+     *
+     * @param GetOrderRequest $request
+     *
+     * @return GetOrderResponse
+     *
+     * @throws Exception\RequestDispatcherException
+     */
+    public function getOrder(GetOrderRequest $request): GetOrderResponse
     {
         return $this->requestDispatcher->dispatch($request);
     }
