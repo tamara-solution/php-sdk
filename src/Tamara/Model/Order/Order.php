@@ -29,6 +29,7 @@ class Order
         DISCOUNT_AMOUNT = 'discount_amount',
         RISK_ASSESSMENT = 'risk_assessment',
         INSTALMENTS = 'instalments',
+        EXPIRY_TIME = 'expires_in_minutes',
         PAY_BY_INSTALMENTS = 'PAY_BY_INSTALMENTS',
         PAY_BY_LATER = 'PAY_BY_LATER';
 
@@ -131,6 +132,11 @@ class Order
      * @var RiskAssessment
      */
     private $riskAssessment;
+
+    /**
+     * @var int
+     */
+    private $expiresInMinutes = 0;
 
     public function getOrderId(): string
     {
@@ -377,6 +383,18 @@ class Order
         return self::PAY_BY_INSTALMENTS === $this->getPaymentType();
     }
 
+    public function getExpiresInMinutes(): int
+    {
+        return $this->expiresInMinutes;
+    }
+
+    public function setExpiresInMinutes(int $expiresInMinutes): Order
+    {
+        $this->expiresInMinutes = $expiresInMinutes;
+
+        return $this;
+    }
+
     public function toArray(): array
     {
         $result = [
@@ -401,6 +419,10 @@ class Order
 
         if ($this->getInstalments() > 0 && $this->isInstalments()) {
             $result[self::INSTALMENTS] = $this->getInstalments();
+        }
+
+        if ($this->getExpiresInMinutes() > 0) {
+            $result[self::EXPIRY_TIME] = $this->getExpiresInMinutes();
         }
 
         return $result;
