@@ -32,7 +32,7 @@ class RefundRequest
 
     public function addRefund(Refund $refund): void
     {
-        $this->refunds[$refund->getCaptureId()] = $refund;
+        $this->refunds[] = $refund;
     }
 
     /**

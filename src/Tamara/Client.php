@@ -69,14 +69,15 @@ class Client
 
     /**
      * @param string $countryCode
+     * @param string $currency
      *
      * @return GetPaymentTypesResponse
      *
      * @throws Exception\RequestDispatcherException
      */
-    public function getPaymentTypes(string $countryCode): GetPaymentTypesResponse
+    public function getPaymentTypes(string $countryCode, string $currency = ''): GetPaymentTypesResponse
     {
-        return $this->requestDispatcher->dispatch(new GetPaymentTypesRequest($countryCode));
+        return $this->requestDispatcher->dispatch(new GetPaymentTypesRequest($countryCode, $currency));
     }
 
     /**
