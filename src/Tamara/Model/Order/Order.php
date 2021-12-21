@@ -31,7 +31,8 @@ class Order
         INSTALMENTS = 'instalments',
         EXPIRY_TIME = 'expires_in_minutes',
         PAY_BY_INSTALMENTS = 'PAY_BY_INSTALMENTS',
-        PAY_BY_LATER = 'PAY_BY_LATER';
+        PAY_BY_LATER = 'PAY_BY_LATER',
+        ADDITIONAL_DATA = 'additional_data';
 
     /**
      * @var string

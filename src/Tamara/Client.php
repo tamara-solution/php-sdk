@@ -5,6 +5,7 @@ namespace Tamara;
 use Tamara\HttpClient\HttpClient;
 use Tamara\Request\Checkout\CreateCheckoutRequest;
 use Tamara\Request\Checkout\GetPaymentTypesRequest;
+use Tamara\Request\Checkout\GetPaymentTypesV2Request;
 use Tamara\Request\Order\AuthoriseOrderRequest;
 use Tamara\Request\Order\CancelOrderRequest;
 use Tamara\Request\Order\GetOrderByReferenceIdRequest;
@@ -36,7 +37,7 @@ class Client
     /**
      * @var string
      */
-    public const VERSION = '1.3.3';
+    public const VERSION = '1.3.7';
 
     /**
      * @var HttpClient
@@ -78,6 +79,18 @@ class Client
     public function getPaymentTypes(string $countryCode, string $currency = ''): GetPaymentTypesResponse
     {
         return $this->requestDispatcher->dispatch(new GetPaymentTypesRequest($countryCode, $currency));
+    }
+
+    /**
+     * @param GetPaymentTypesV2Request $request
+     *
+     * @return GetPaymentTypesResponse
+     *
+     * @throws Exception\RequestDispatcherException
+     */
+    public function getPaymentTypesV2(GetPaymentTypesV2Request $request): GetPaymentTypesResponse
+    {
+        return $this->requestDispatcher->dispatch($request);
     }
 
     /**
