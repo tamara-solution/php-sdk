@@ -11,7 +11,7 @@ class GetPaymentTypesV2RequestHandler extends AbstractRequestHandler
 
     public function __invoke(GetPaymentTypesV2Request $request): GetPaymentTypesResponse
     {
-        $response = $this->httpClient->get(
+        $response = $this->httpClient->post(
             self::GET_PAYMENT_TYPES_V2_ENDPOINT,
             $request->toArray()
         );
