@@ -36,7 +36,7 @@ abstract class ClientResponse
         $this->errors = $responseBody['errors'] ?? null;
 
         if ($this->isSuccess()) {
-            $this->parse($responseBody);
+            $this->parse($responseBody ?? []);
         }
     }
 
