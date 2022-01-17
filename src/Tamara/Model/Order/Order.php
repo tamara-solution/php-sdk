@@ -95,9 +95,9 @@ class Order
     private $consumer;
 
     /**
-     * @var Address
+     * @var Address|null
      */
-    private $billingAddress;
+    private $billingAddress = null;
 
     /**
      * @var Address
@@ -283,9 +283,9 @@ class Order
         return $this;
     }
 
-    public function getBillingAddress(): Address
+    public function getBillingAddress(): ?Address
     {
-        return $this->billingAddress;
+        return $this->billingAddress ?? null;
     }
 
     public function setBillingAddress(Address $billingAddress): Order
@@ -408,7 +408,7 @@ class Order
             self::LOCALE             => $this->getLocale(),
             self::ITEMS              => $this->getItems()->toArray(),
             self::CONSUMER           => $this->getConsumer()->toArray(),
-            self::BILLING_ADDRESS    => $this->getBillingAddress()->toArray(),
+            self::BILLING_ADDRESS    => $this->getBillingAddress() ? $this->getBillingAddress()->toArray() : null,
             self::SHIPPING_ADDRESS   => $this->getShippingAddress()->toArray(),
             self::DISCOUNT           => $this->getDiscount()->toArray(),
             self::TAX_AMOUNT         => $this->getTaxAmount()->toArray(),

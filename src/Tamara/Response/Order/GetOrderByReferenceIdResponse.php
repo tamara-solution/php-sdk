@@ -64,7 +64,7 @@ class GetOrderByReferenceIdResponse extends ClientResponse
     private $status;
 
     /**
-     * @var Address
+     * @var Address|null
      */
     private $billingAddress;
 
@@ -168,9 +168,9 @@ class GetOrderByReferenceIdResponse extends ClientResponse
         return $this->status;
     }
 
-    public function getBillingAddress(): Address
+    public function getBillingAddress(): ?Address
     {
-        return $this->billingAddress;
+        return $this->billingAddress ?? null;
     }
 
     public function getShippingAddress(): Address
@@ -259,7 +259,7 @@ class GetOrderByReferenceIdResponse extends ClientResponse
         $this->orderNumber = $responseData[self::ORDER_NUMBER] ?? $this->orderReferenceId;
         $this->consumer = Consumer::fromArray($responseData[self::CONSUMER]);
         $this->status = $responseData[self::STATUS];
-        $this->billingAddress = Address::fromArray($responseData[self::BILLING_ADDRESS]);
+        $this->billingAddress = is_array($responseData[self::BILLING_ADDRESS]) ? Address::fromArray($responseData[self::BILLING_ADDRESS]) : null;
         $this->shippingAddress = Address::fromArray($responseData[self::SHIPPING_ADDRESS]);
         $this->paymentType = $responseData[self::PAYMENT_TYPE] ?? '';
         $this->totalAmount = Money::fromArray($responseData[self::TOTAL_AMOUNT]);
