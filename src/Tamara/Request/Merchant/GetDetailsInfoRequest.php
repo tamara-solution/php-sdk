@@ -9,7 +9,7 @@ use Tamara\Model\Merchant;
 class GetDetailsInfoRequest
 {
     /**
-     * @var $merchant
+     * @var Merchant
      */
     private $merchant;
 

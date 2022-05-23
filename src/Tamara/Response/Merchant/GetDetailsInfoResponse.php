@@ -10,7 +10,7 @@ use Tamara\Response\ClientResponse;
 class GetDetailsInfoResponse extends ClientResponse
 {
     /**
-     * @var $merchant
+     * @var Merchant
      */
     private $merchant;
 
