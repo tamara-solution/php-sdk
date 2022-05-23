@@ -6,6 +6,7 @@ use Tamara\HttpClient\HttpClient;
 use Tamara\Request\Checkout\CreateCheckoutRequest;
 use Tamara\Request\Checkout\GetPaymentTypesRequest;
 use Tamara\Request\Checkout\GetPaymentTypesV2Request;
+use Tamara\Request\Checkout\CheckPaymentOptionsAvailabilityRequest;
 use Tamara\Request\Order\AuthoriseOrderRequest;
 use Tamara\Request\Order\CancelOrderRequest;
 use Tamara\Request\Order\GetOrderByReferenceIdRequest;
@@ -18,8 +19,10 @@ use Tamara\Request\Webhook\RegisterWebhookRequest;
 use Tamara\Request\Webhook\RemoveWebhookRequest;
 use Tamara\Request\Webhook\RetrieveWebhookRequest;
 use Tamara\Request\Webhook\UpdateWebhookRequest;
+use Tamara\Request\Merchant\GetDetailsInfoRequest;
 use Tamara\Response\Checkout\CreateCheckoutResponse;
 use Tamara\Response\Checkout\GetPaymentTypesResponse;
+use Tamara\Response\Checkout\CheckPaymentOptionsAvailabilityResponse;
 use Tamara\Response\Order\AuthoriseOrderResponse;
 use Tamara\Response\Order\GetOrderByReferenceIdResponse;
 use Tamara\Response\Order\GetOrderResponse;
@@ -31,6 +34,7 @@ use Tamara\Response\Webhook\RegisterWebhookResponse;
 use Tamara\Response\Webhook\RemoveWebhookResponse;
 use Tamara\Response\Webhook\RetrieveWebhookResponse;
 use Tamara\Response\Webhook\UpdateWebhookResponse;
+use Tamara\Response\Merchant\GetDetailsInfoResponse;
 
 class Client
 {
@@ -233,6 +237,28 @@ class Client
      * @throws Exception\RequestDispatcherException
      */
     public function getOrder(GetOrderRequest $request): GetOrderResponse
+    {
+        return $this->requestDispatcher->dispatch($request);
+    }
+
+    /**
+     * Get merchant details information by merchant id
+     * @param GetDetailsInfoRequest $request
+     * @return GetDetailsInfoResponse
+     * @throws Exception\RequestDispatcherException
+     */
+    public function getMerchantDetailsInfo(GetDetailsInfoRequest $request): GetDetailsInfoResponse
+    {
+        return $this->requestDispatcher->dispatch($request);
+    }
+
+    /**
+     * Check if there are any available payment options for customer with the given order value
+     * @param CheckPaymentOptionsAvailabilityRequest $request
+     * @return CheckPaymentOptionsAvailabilityResponse
+     * @throws Exception\RequestDispatcherException
+     */
+    public function checkPaymentOptionsAvailability(CheckPaymentOptionsAvailabilityRequest $request): CheckPaymentOptionsAvailabilityResponse
     {
         return $this->requestDispatcher->dispatch($request);
     }
