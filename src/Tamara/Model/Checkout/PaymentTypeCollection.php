@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Tamara\Model\Checkout;
@@ -25,9 +24,14 @@ class PaymentTypeCollection implements IteratorAggregate, Countable
 
     public function __construct(array $paymentTypes)
     {
+        $zeroDefault = [
+            Money::AMOUNT   => 0.0,
+            Money::CURRENCY => 'SAR',
+        ];
+
         foreach ($paymentTypes as $paymentType) {
-            $minLimit = $paymentType[self::MIN_LIMIT];
-            $maxLimit = $paymentType[self::MAX_LIMIT];
+            $minLimit = $paymentType[self::MIN_LIMIT] ?? $zeroDefault;
+            $maxLimit = $paymentType[self::MAX_LIMIT] ?? $zeroDefault;
 
             $this->data[] = new PaymentType(
                 $paymentType[self::NAME],
@@ -54,12 +58,16 @@ class PaymentTypeCollection implements IteratorAggregate, Countable
 
     private function parseSupportedInstalments(array $data): array
     {
+        $zeroDefault = [
+            Money::AMOUNT   => 0.0,
+            Money::CURRENCY => 'SAR',
+        ];
+
         $result = [];
         if (isset($data[PaymentType::SUPPORTED_INSTALMENTS]) && !empty($data[PaymentType::SUPPORTED_INSTALMENTS])) {
             foreach ($data[PaymentType::SUPPORTED_INSTALMENTS] as $item) {
-                $minLimit = $item[self::MIN_LIMIT];
-                $maxLimit = $item[self::MAX_LIMIT];
-
+                $minLimit = $item[self::MIN_LIMIT] ?? $zeroDefault;
+                $maxLimit = $item[self::MAX_LIMIT] ?? $zeroDefault;
                 $instalment = new Instalment(
                     (int) $item[Order::INSTALMENTS],
                     new Money((float) $minLimit[Money::AMOUNT], $minLimit[Money::CURRENCY]),
