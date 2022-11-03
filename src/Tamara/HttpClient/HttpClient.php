@@ -93,10 +93,10 @@ class HttpClient
      * @param string $path
      * @param array  $params
      *
-     * @return ResponseInterface
+     * @return null|ResponseInterface
      * @throws ClientExceptionInterface|RequestException
      */
-    private function request(string $method, string $path, array $params = []): ResponseInterface
+    private function request(string $method, string $path, array $params = []): ?ResponseInterface
     {
         if ('GET' === $method) {
             $path = $this->prepareQueryString($path, $params);
@@ -128,6 +128,8 @@ class HttpClient
                 return $exception->getResponse();
             }
         }
+
+        return null;
     }
 
     /**

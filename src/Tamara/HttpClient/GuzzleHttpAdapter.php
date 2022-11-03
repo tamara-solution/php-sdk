@@ -78,11 +78,16 @@ class GuzzleHttpAdapter implements ClientInterface
                 $this->logger->error($exception->getMessage(), $exception->getTrace());
             }
 
+            $exceptionResponse = null;
+            if (method_exists($exception, 'getResponse')) {
+                $exceptionResponse = $exception->getResponse();
+            }
+
             throw new RequestException(
                 $exception->getMessage(),
                 $exception->getCode(),
                 $request,
-                $exception instanceof GuzzleRequestException ? $exception->getResponse() : null,
+                $exceptionResponse,
                 $exception->getPrevious()
             );
         }
