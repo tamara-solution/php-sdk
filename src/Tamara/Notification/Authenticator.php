@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tamara\Notification;
 
 use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 use Symfony\Component\HttpFoundation\Request;
 use Tamara\Notification\Exception\ForbiddenException;
 use Throwable;
@@ -62,6 +63,6 @@ class Authenticator
      */
     protected function decode(string $token)
     {
-        return JWT::decode($token, $this->tokenKey, ['HS256']);
+        return JWT::decode($token, new Key($this->tokenKey, 'HS256'));
     }
 }
