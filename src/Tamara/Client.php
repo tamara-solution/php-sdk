@@ -3,6 +3,7 @@
 namespace Tamara;
 
 use Tamara\HttpClient\HttpClient;
+use Tamara\Request\Checkout\CheckPaymentOptionsAvailabilityRequest;
 use Tamara\Request\Checkout\CreateCheckoutRequest;
 use Tamara\Request\Checkout\GetPaymentTypesRequest;
 use Tamara\Request\Checkout\GetPaymentTypesV2Request;
@@ -18,6 +19,7 @@ use Tamara\Request\Webhook\RegisterWebhookRequest;
 use Tamara\Request\Webhook\RemoveWebhookRequest;
 use Tamara\Request\Webhook\RetrieveWebhookRequest;
 use Tamara\Request\Webhook\UpdateWebhookRequest;
+use Tamara\Response\Checkout\CheckPaymentOptionsAvailabilityResponse;
 use Tamara\Response\Checkout\CreateCheckoutResponse;
 use Tamara\Response\Checkout\GetPaymentTypesResponse;
 use Tamara\Response\Order\AuthoriseOrderResponse;
@@ -37,7 +39,7 @@ class Client
     /**
      * @var string
      */
-    public const VERSION = '1.3.7';
+    public const VERSION = '2.0.1';
 
     /**
      * @var HttpClient
@@ -233,6 +235,17 @@ class Client
      * @throws Exception\RequestDispatcherException
      */
     public function getOrder(GetOrderRequest $request): GetOrderResponse
+    {
+        return $this->requestDispatcher->dispatch($request);
+    }
+
+    /**
+     * Check if there are any available payment options for customer with the given order value
+     * @param CheckPaymentOptionsAvailabilityRequest $request
+     * @return CheckPaymentOptionsAvailabilityResponse
+     * @throws Exception\RequestDispatcherException
+     */
+    public function checkPaymentOptionsAvailability(CheckPaymentOptionsAvailabilityRequest $request): CheckPaymentOptionsAvailabilityResponse
     {
         return $this->requestDispatcher->dispatch($request);
     }
