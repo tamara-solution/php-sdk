@@ -33,13 +33,15 @@ use Tamara\Response\Webhook\RegisterWebhookResponse;
 use Tamara\Response\Webhook\RemoveWebhookResponse;
 use Tamara\Response\Webhook\RetrieveWebhookResponse;
 use Tamara\Response\Webhook\UpdateWebhookResponse;
+use Tamara\Request\Merchant\GetPublicConfigsRequest;
+use Tamara\Response\Merchant\GetPublicConfigsResponse;
 
 class Client
 {
     /**
      * @var string
      */
-    public const VERSION = '2.0.1';
+    public const VERSION = '2.0.2';
 
     /**
      * @var HttpClient
@@ -246,6 +248,17 @@ class Client
      * @throws Exception\RequestDispatcherException
      */
     public function checkPaymentOptionsAvailability(CheckPaymentOptionsAvailabilityRequest $request): CheckPaymentOptionsAvailabilityResponse
+    {
+        return $this->requestDispatcher->dispatch($request);
+    }
+
+    /**
+     * Get merchant configs information
+     * @param GetPublicConfigsRequest $request
+     * @return GetPublicConfigsResponse
+     * @throws Exception\RequestDispatcherException
+     */
+    public function getMerchantPublicConfigs(GetPublicConfigsRequest $request): GetPublicConfigsResponse
     {
         return $this->requestDispatcher->dispatch($request);
     }

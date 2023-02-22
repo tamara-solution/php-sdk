@@ -33,7 +33,7 @@ class CheckPaymentOptionsAvailabilityResponse extends ClientResponse
      */
     public function hasAvailablePaymentOptions()
     {
-        return boolval($this->hasAvailablePaymentOptions);
+        return $this->hasAvailablePaymentOptions;
     }
 
     /**
@@ -41,7 +41,7 @@ class CheckPaymentOptionsAvailabilityResponse extends ClientResponse
      */
     public function isSingleCheckoutEnabled()
     {
-        return boolval($this->singleCheckoutEnabled);
+        return $this->singleCheckoutEnabled;
     }
 
     /**
