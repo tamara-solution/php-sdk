@@ -18,7 +18,8 @@ class OrderItem
         TOTAL_AMOUNT = 'total_amount',
         UNIT_PRICE = 'unit_price',
         DISCOUNT_AMOUNT = 'discount_amount',
-        IMAGE_URL = 'image_url';
+        IMAGE_URL = 'image_url',
+        ITEM_URL = 'item_url';
 
     /**
      * @var string
@@ -70,6 +71,11 @@ class OrderItem
      */
     private $imageUrl;
 
+    /**
+     * @var string
+     */
+    private $itemUrl;
+
     public static function fromArray(array $data): OrderItem
     {
         $self = new self();
@@ -83,6 +89,7 @@ class OrderItem
         $self->setTaxAmount(Money::fromArray($data[self::TAX_AMOUNT]));
         $self->setDiscountAmount(Money::fromArray($data[self::DISCOUNT_AMOUNT]));
         $self->setImageUrl($data[self::IMAGE_URL] ?? '');
+        $self->setItemUrl($data[self::ITEM_URL] ?? '');
 
         return $self;
     }
@@ -213,6 +220,23 @@ class OrderItem
         return $this->imageUrl ?? '';
     }
 
+    /**
+     * @param string $itemUrl
+     * @return $this
+     */
+    public function setItemUrl(string $itemUrl) {
+        $this->itemUrl = $itemUrl;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getItemUrl(): string
+    {
+        return $this->itemUrl ?? '';
+    }
+
     public function toArray(): array
     {
         return [
@@ -226,6 +250,7 @@ class OrderItem
             self::UNIT_PRICE      => $this->getUnitPrice() ? $this->getUnitPrice()->toArray() : null,
             self::DISCOUNT_AMOUNT => $this->getDiscountAmount() ? $this->getDiscountAmount()->toArray() : null,
             self::IMAGE_URL       => $this->getImageUrl(),
+            self::ITEM_URL        => $this->getItemUrl()
         ];
     }
 }

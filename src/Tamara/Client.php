@@ -7,6 +7,7 @@ use Tamara\Request\Checkout\CheckPaymentOptionsAvailabilityRequest;
 use Tamara\Request\Checkout\CreateCheckoutRequest;
 use Tamara\Request\Checkout\GetPaymentTypesRequest;
 use Tamara\Request\Checkout\GetPaymentTypesV2Request;
+use Tamara\Request\Merchant\GetPublicConfigsRequest;
 use Tamara\Request\Order\AuthoriseOrderRequest;
 use Tamara\Request\Order\CancelOrderRequest;
 use Tamara\Request\Order\GetOrderByReferenceIdRequest;
@@ -14,6 +15,7 @@ use Tamara\Request\Order\GetOrderRequest;
 use Tamara\Request\Order\UpdateReferenceIdRequest;
 use Tamara\Request\Payment\CaptureRequest;
 use Tamara\Request\Payment\RefundRequest;
+use Tamara\Request\Payment\SimplifiedRefundRequest;
 use Tamara\Request\RequestDispatcher;
 use Tamara\Request\Webhook\RegisterWebhookRequest;
 use Tamara\Request\Webhook\RemoveWebhookRequest;
@@ -22,6 +24,7 @@ use Tamara\Request\Webhook\UpdateWebhookRequest;
 use Tamara\Response\Checkout\CheckPaymentOptionsAvailabilityResponse;
 use Tamara\Response\Checkout\CreateCheckoutResponse;
 use Tamara\Response\Checkout\GetPaymentTypesResponse;
+use Tamara\Response\Merchant\GetPublicConfigsResponse;
 use Tamara\Response\Order\AuthoriseOrderResponse;
 use Tamara\Response\Order\GetOrderByReferenceIdResponse;
 use Tamara\Response\Order\GetOrderResponse;
@@ -29,19 +32,18 @@ use Tamara\Response\Order\UpdateReferenceIdResponse;
 use Tamara\Response\Payment\CancelResponse;
 use Tamara\Response\Payment\CaptureResponse;
 use Tamara\Response\Payment\RefundResponse;
+use Tamara\Response\Payment\SimplifiedRefundResponse;
 use Tamara\Response\Webhook\RegisterWebhookResponse;
 use Tamara\Response\Webhook\RemoveWebhookResponse;
 use Tamara\Response\Webhook\RetrieveWebhookResponse;
 use Tamara\Response\Webhook\UpdateWebhookResponse;
-use Tamara\Request\Merchant\GetPublicConfigsRequest;
-use Tamara\Response\Merchant\GetPublicConfigsResponse;
 
 class Client
 {
     /**
      * @var string
      */
-    public const VERSION = '2.0.2';
+    public const VERSION = '2.0.3';
 
     /**
      * @var HttpClient
@@ -54,6 +56,15 @@ class Client
     private $requestDispatcher;
 
     /**
+     * @param HttpClient $httpClient
+     */
+    public function __construct(HttpClient $httpClient)
+    {
+        $this->httpClient = $httpClient;
+        $this->requestDispatcher = new RequestDispatcher($httpClient);
+    }
+
+    /**
      * @param Configuration $configuration
      *
      * @return Client
@@ -61,15 +72,6 @@ class Client
     public static function create(Configuration $configuration): Client
     {
         return new static($configuration->createHttpClient());
-    }
-
-    /**
-     * @param HttpClient $httpClient
-     */
-    public function __construct(HttpClient $httpClient)
-    {
-        $this->httpClient = $httpClient;
-        $this->requestDispatcher = new RequestDispatcher($httpClient);
     }
 
     /**
@@ -259,6 +261,17 @@ class Client
      * @throws Exception\RequestDispatcherException
      */
     public function getMerchantPublicConfigs(GetPublicConfigsRequest $request): GetPublicConfigsResponse
+    {
+        return $this->requestDispatcher->dispatch($request);
+    }
+
+    /**
+     * Make a refund using fewer parameters
+     * @param SimplifiedRefundRequest $request
+     * @return SimplifiedRefundResponse
+     * @throws Exception\RequestDispatcherException
+     */
+    public function simplifyRefund(SimplifiedRefundRequest $request): SimplifiedRefundResponse
     {
         return $this->requestDispatcher->dispatch($request);
     }
