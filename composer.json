@@ -19,7 +19,7 @@
   "require": {
     "php": "^7.1|^8.0",
     "psr/http-client": "^1.0",
-    "psr/log": "^1.0",
+    "psr/log": "^1.0||^2.0||^3.0",
     "ext-json": "*",
     "symfony/http-foundation": ">=4.1",
     "firebase/php-jwt": "^6.1",
