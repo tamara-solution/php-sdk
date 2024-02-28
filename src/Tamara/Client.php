@@ -5,6 +5,7 @@ namespace Tamara;
 use Tamara\HttpClient\HttpClient;
 use Tamara\Request\Checkout\CheckPaymentOptionsAvailabilityRequest;
 use Tamara\Request\Checkout\CreateCheckoutRequest;
+use Tamara\Request\Checkout\CreateInstoreCheckoutRequest;
 use Tamara\Request\Checkout\GetPaymentTypesRequest;
 use Tamara\Request\Checkout\GetPaymentTypesV2Request;
 use Tamara\Request\Merchant\GetPublicConfigsRequest;
@@ -23,6 +24,7 @@ use Tamara\Request\Webhook\RetrieveWebhookRequest;
 use Tamara\Request\Webhook\UpdateWebhookRequest;
 use Tamara\Response\Checkout\CheckPaymentOptionsAvailabilityResponse;
 use Tamara\Response\Checkout\CreateCheckoutResponse;
+use Tamara\Response\Checkout\CreateInstoreCheckoutResponse;
 use Tamara\Response\Checkout\GetPaymentTypesResponse;
 use Tamara\Response\Merchant\GetPublicConfigsResponse;
 use Tamara\Response\Order\AuthoriseOrderResponse;
@@ -274,5 +276,15 @@ class Client
     public function simplifyRefund(SimplifiedRefundRequest $request): SimplifiedRefundResponse
     {
         return $this->requestDispatcher->dispatch($request);
+    }
+
+    /**
+     * @param CreateInstoreCheckoutRequest $createInstoreCheckoutRequest
+     * @return CreateInstoreCheckoutResponse
+     * @throws Exception\RequestDispatcherException
+     */
+    public function createInstoreCheckout(CreateInstoreCheckoutRequest $createInstoreCheckoutRequest): CreateInstoreCheckoutResponse
+    {
+        return $this->requestDispatcher->dispatch($createInstoreCheckoutRequest);
     }
 }
