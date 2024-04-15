@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tamara\Request\Webhook;
 
 use Tamara\Request\AbstractRequestHandler;
+use Tamara\Response\ClientResponse;
 use Tamara\Response\Webhook\RemoveWebhookResponse;
 
 class RemoveWebhookRequestHandler extends AbstractRequestHandler

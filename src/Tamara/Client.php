@@ -57,18 +57,31 @@ class Client
      */
     private $requestDispatcher;
 
+    /**
+     * @param HttpClient $httpClient
+     */
     public function __construct(HttpClient $httpClient)
     {
         $this->httpClient = $httpClient;
         $this->requestDispatcher = new RequestDispatcher($httpClient);
     }
 
+    /**
+     * @param Configuration $configuration
+     *
+     * @return Client
+     */
     public static function create(Configuration $configuration): Client
     {
         return new static($configuration->createHttpClient());
     }
 
     /**
+     * @param string $countryCode
+     * @param string $currency
+     *
+     * @return GetPaymentTypesResponse
+     *
      * @throws Exception\RequestDispatcherException
      */
     public function getPaymentTypes(string $countryCode, string $currency = ''): GetPaymentTypesResponse
@@ -77,6 +90,10 @@ class Client
     }
 
     /**
+     * @param GetPaymentTypesV2Request $request
+     *
+     * @return GetPaymentTypesResponse
+     *
      * @throws Exception\RequestDispatcherException
      */
     public function getPaymentTypesV2(GetPaymentTypesV2Request $request): GetPaymentTypesResponse
@@ -85,6 +102,10 @@ class Client
     }
 
     /**
+     * @param CreateCheckoutRequest $createCheckoutRequest
+     *
+     * @return CreateCheckoutResponse
+     *
      * @throws Exception\RequestDispatcherException
      */
     public function createCheckout(CreateCheckoutRequest $createCheckoutRequest): CreateCheckoutResponse
@@ -93,6 +114,10 @@ class Client
     }
 
     /**
+     * @param AuthoriseOrderRequest $authoriseOrderRequest
+     *
+     * @return AuthoriseOrderResponse
+     *
      * @throws Exception\RequestDispatcherException
      */
     public function authoriseOrder(AuthoriseOrderRequest $authoriseOrderRequest): AuthoriseOrderResponse
@@ -101,6 +126,10 @@ class Client
     }
 
     /**
+     * @param CancelOrderRequest $cancelOrderRequest
+     *
+     * @return CancelResponse
+     *
      * @throws Exception\RequestDispatcherException
      */
     public function cancelOrder(CancelOrderRequest $cancelOrderRequest): CancelResponse
@@ -109,6 +138,10 @@ class Client
     }
 
     /**
+     * @param CaptureRequest $captureRequest
+     *
+     * @return CaptureResponse
+     *
      * @throws Exception\RequestDispatcherException
      */
     public function capture(CaptureRequest $captureRequest): CaptureResponse
@@ -117,6 +150,10 @@ class Client
     }
 
     /**
+     * @param RefundRequest $refundRequest
+     *
+     * @return RefundResponse
+     *
      * @throws Exception\RequestDispatcherException
      */
     public function refund(RefundRequest $refundRequest): RefundResponse
@@ -125,6 +162,8 @@ class Client
     }
 
     /**
+     * @param RegisterWebhookRequest $request
+     * @return RegisterWebhookResponse
      * @throws Exception\RequestDispatcherException
      */
     public function registerWebhook(RegisterWebhookRequest $request): RegisterWebhookResponse
@@ -133,6 +172,10 @@ class Client
     }
 
     /**
+     * @param RetrieveWebhookRequest $request
+     *
+     * @return RetrieveWebhookResponse
+     *
      * @throws Exception\RequestDispatcherException
      */
     public function retrieveWebhook(RetrieveWebhookRequest $request): RetrieveWebhookResponse
@@ -141,6 +184,10 @@ class Client
     }
 
     /**
+     * @param RemoveWebhookRequest $request
+     *
+     * @return RemoveWebhookResponse
+     *
      * @throws Exception\RequestDispatcherException
      */
     public function removeWebhook(RemoveWebhookRequest $request): RemoveWebhookResponse
@@ -149,6 +196,10 @@ class Client
     }
 
     /**
+     * @param UpdateWebhookRequest $request
+     *
+     * @return UpdateWebhookResponse
+     *
      * @throws Exception\RequestDispatcherException
      */
     public function updateWebhook(UpdateWebhookRequest $request): UpdateWebhookResponse
@@ -157,6 +208,10 @@ class Client
     }
 
     /**
+     * @param UpdateReferenceIdRequest $request
+     *
+     * @return UpdateReferenceIdResponse
+     *
      * @throws Exception\RequestDispatcherException
      */
     public function updateOrderReferenceId(UpdateReferenceIdRequest $request): UpdateReferenceIdResponse
@@ -165,6 +220,10 @@ class Client
     }
 
     /**
+     * @param GetOrderByReferenceIdRequest $request
+     *
+     * @return GetOrderByReferenceIdResponse
+     *
      * @throws Exception\RequestDispatcherException
      */
     public function getOrderByReferenceId(GetOrderByReferenceIdRequest $request): GetOrderByReferenceIdResponse
@@ -175,7 +234,9 @@ class Client
     /**
      * Get order details by tamara order id
      *
+     * @param GetOrderRequest $request
      *
+     * @return GetOrderResponse
      *
      * @throws Exception\RequestDispatcherException
      */
@@ -186,7 +247,8 @@ class Client
 
     /**
      * Check if there are any available payment options for customer with the given order value
-     *
+     * @param CheckPaymentOptionsAvailabilityRequest $request
+     * @return CheckPaymentOptionsAvailabilityResponse
      * @throws Exception\RequestDispatcherException
      */
     public function checkPaymentOptionsAvailability(CheckPaymentOptionsAvailabilityRequest $request): CheckPaymentOptionsAvailabilityResponse
@@ -196,7 +258,8 @@ class Client
 
     /**
      * Get merchant configs information
-     *
+     * @param GetPublicConfigsRequest $request
+     * @return GetPublicConfigsResponse
      * @throws Exception\RequestDispatcherException
      */
     public function getMerchantPublicConfigs(GetPublicConfigsRequest $request): GetPublicConfigsResponse
@@ -206,7 +269,8 @@ class Client
 
     /**
      * Make a refund using fewer parameters
-     *
+     * @param SimplifiedRefundRequest $request
+     * @return SimplifiedRefundResponse
      * @throws Exception\RequestDispatcherException
      */
     public function simplifyRefund(SimplifiedRefundRequest $request): SimplifiedRefundResponse
@@ -215,6 +279,8 @@ class Client
     }
 
     /**
+     * @param CreateInstoreCheckoutRequest $createInstoreCheckoutRequest
+     * @return CreateInstoreCheckoutResponse
      * @throws Exception\RequestDispatcherException
      */
     public function createInstoreCheckout(CreateInstoreCheckoutRequest $createInstoreCheckoutRequest): CreateInstoreCheckoutResponse
