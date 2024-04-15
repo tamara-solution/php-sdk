@@ -12,6 +12,9 @@ class GetPaymentTypesResponse extends ClientResponse
      */
     private $paymentTypes;
 
+    /**
+     * @return PaymentTypeCollection|null
+     */
     public function getPaymentTypes(): ?PaymentTypeCollection
     {
         return $this->isSuccess() ? $this->paymentTypes : null;

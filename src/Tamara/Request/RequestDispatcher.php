@@ -21,16 +21,18 @@ class RequestDispatcher
     }
 
     /**
+     * @param object $request
+     *
      * @return mixed
      *
      * @throws RequestDispatcherException
      */
-    public function dispatch(object $request)
+    public function dispatch($request)
     {
         $requestClass = get_class($request);
-        $handlerClass = $requestClass.'Handler';
+        $handlerClass = $requestClass . 'Handler';
 
-        if (! class_exists($handlerClass)) {
+        if (!class_exists($handlerClass)) {
             throw new RequestDispatcherException(sprintf(
                 'Missing handler for this request, please add %s',
                 $handlerClass
@@ -41,7 +43,7 @@ class RequestDispatcher
 
         $response = $handler($request);
 
-        if (! $response instanceof ClientResponse) {
+        if (!$response instanceof ClientResponse) {
             throw new RequestDispatcherException(sprintf(
                 'The response of the %s::__invoke must be type of %s',
                 $handlerClass,

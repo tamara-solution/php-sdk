@@ -30,16 +30,25 @@ class SimplifiedRefundRequest
         $this->comment = $comment;
     }
 
+    /**
+     * @return string
+     */
     public function getOrderId(): string
     {
         return $this->orderId;
     }
 
+    /**
+     * @return Money
+     */
     public function getTotalAmount(): Money
     {
         return $this->totalAmount;
     }
 
+    /**
+     * @return string
+     */
     public function getComment(): string
     {
         return $this->comment;

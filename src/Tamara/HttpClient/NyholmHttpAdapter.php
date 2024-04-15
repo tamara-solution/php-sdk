@@ -23,7 +23,7 @@ class NyholmHttpAdapter implements ClientInterface
      */
     protected $logger;
 
-    public function __construct(int $requestTimeout, ?LoggerInterface $logger = null)
+    public function __construct(int $requestTimeout, LoggerInterface $logger = null)
     {
         $this->requestTimeout = $requestTimeout;
         $this->logger = $logger;
@@ -56,7 +56,7 @@ class NyholmHttpAdapter implements ClientInterface
                 ]
             );
         } catch (\Throwable $exception) {
-            if ($this->logger !== null) {
+            if (null !== $this->logger) {
                 $this->logger->error($exception->getMessage(), $exception->getTrace());
             }
 

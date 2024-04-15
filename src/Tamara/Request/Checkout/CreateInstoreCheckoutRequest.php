@@ -18,8 +18,12 @@ class CreateInstoreCheckoutRequest
         $this->order = $order;
     }
 
+    /**
+     * @return InstoreOrder
+     */
     public function getOrder(): InstoreOrder
     {
         return $this->order;
     }
+
 }

@@ -1,13 +1,12 @@
 <?php
 
-declare(strict_types=1);
+declare (strict_types=1);
 
 namespace Tamara\Model;
 
 class Merchant
 {
     public const SINGLE_CHECKOUT_ENABLED = 'single_checkout_enabled';
-
     public const PUBLIC_KEY = 'public_key';
 
     /**
@@ -20,23 +19,37 @@ class Merchant
      */
     private $publicKey;
 
+    /**
+     * @param bool $singleCheckoutEnabled
+     * @param string $publicKey
+     */
     public function __construct(bool $singleCheckoutEnabled, string $publicKey)
     {
         $this->singleCheckoutEnabled = $singleCheckoutEnabled;
         $this->publicKey = $publicKey;
     }
 
-    public static function fromArray(array $data): Merchant
+    /**
+     * @param array $data
+     * @return Merchant
+     */
+    public static function fromArray(array $data)
     {
         return new self($data[self::SINGLE_CHECKOUT_ENABLED], $data[self::PUBLIC_KEY]);
     }
 
-    public function getSingleCheckoutEnabled(): bool
+    /**
+     * @return bool
+     */
+    public function getSingleCheckoutEnabled()
     {
         return $this->singleCheckoutEnabled;
     }
 
-    public function getPublicKey(): string
+    /**
+     * @return string
+     */
+    public function getPublicKey()
     {
         return $this->publicKey;
     }

@@ -8,9 +8,9 @@ use Tamara\Response\ClientResponse;
 
 class CaptureResponse extends ClientResponse
 {
-    private const ORDER_ID = 'order_id';
-
-    private const CAPTURE_ID = 'capture_id';
+    private const
+        ORDER_ID = 'order_id',
+        CAPTURE_ID = 'capture_id';
 
     /**
      * @var string|null

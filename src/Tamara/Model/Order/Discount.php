@@ -8,9 +8,9 @@ use Tamara\Model\Money;
 
 class Discount
 {
-    public const NAME = 'name';
-
-    public const AMOUNT = 'amount';
+    public const
+        NAME = 'name',
+        AMOUNT = 'amount';
 
     /**
      * @var string
@@ -60,7 +60,7 @@ class Discount
     public function toArray(): array
     {
         return [
-            self::NAME => $this->getName(),
+            self::NAME   => $this->getName(),
             self::AMOUNT => $this->getAmount()->toArray(),
         ];
     }

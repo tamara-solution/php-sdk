@@ -18,8 +18,12 @@ class CreateCheckoutRequest
         $this->order = $order;
     }
 
-    public function getOrder(): Order
+    /**
+     * @return Order
+     */
+    public function getOrder()
     {
         return $this->order;
     }
+
 }

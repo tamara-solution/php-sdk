@@ -2,13 +2,14 @@
 
 declare(strict_types=1);
 
+
 namespace Tamara\Model\Order;
 
 use ArrayIterator;
 use Countable;
 use IteratorAggregate;
 
-class OrderItemCollection implements Countable, IteratorAggregate
+class OrderItemCollection implements IteratorAggregate, Countable
 {
     /**
      * @var array|OrderItem[]
@@ -55,7 +56,7 @@ class OrderItemCollection implements Countable, IteratorAggregate
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function count(): int
     {

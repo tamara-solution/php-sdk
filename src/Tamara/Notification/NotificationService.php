@@ -26,6 +26,8 @@ class NotificationService
     }
 
     /**
+     * @return AuthoriseMessage
+     *
      * @throws ForbiddenException
      * @throws NotificationException
      */
@@ -38,6 +40,8 @@ class NotificationService
     }
 
     /**
+     * @return WebhookMessage
+     *
      * @throws ForbiddenException
      * @throws NotificationException
      */
@@ -50,6 +54,8 @@ class NotificationService
     }
 
     /**
+     * @return array
+     *
      * @throws ForbiddenException
      * @throws NotificationException
      */
@@ -67,6 +73,8 @@ class NotificationService
     }
 
     /**
+     * @param Request $request
+     *
      * @throws ForbiddenException
      */
     private function authenticate(Request $request): void

@@ -6,11 +6,9 @@ namespace Tamara\Model;
 
 class Webhook
 {
-    public const WEBHOOK_ID = 'webhook_id';
-
-    public const URL = 'url';
-
-    public const EVENTS = 'events';
-
-    public const HEADERS = 'headers';
+    public const
+        WEBHOOK_ID = 'webhook_id',
+        URL = 'url',
+        EVENTS = 'events',
+        HEADERS = 'headers';
 }

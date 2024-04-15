@@ -17,7 +17,7 @@ class SimplifiedRefundRequestHandler extends AbstractRequestHandler
             sprintf(self::SIMPLIFIED_REFUND_ENDPOINT, $request->getOrderId()),
             [
                 'total_amount' => $request->getTotalAmount()->toArray(),
-                'comment' => $request->getComment(),
+                'comment'      => $request->getComment()
             ]
         );
 

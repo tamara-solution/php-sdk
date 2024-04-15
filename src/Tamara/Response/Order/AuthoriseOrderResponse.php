@@ -10,19 +10,14 @@ use Tamara\Response\ClientResponse;
 
 class AuthoriseOrderResponse extends ClientResponse
 {
-    private const ORDER_ID = 'order_id';
-
-    private const STATUS = 'status';
-
-    private const ORDER_EXPIRY_TIME = 'order_expiry_time';
-
-    private const PAYMENT_TYPE = 'payment_type';
-
-    private const AUTO_CAPTURED = 'auto_captured';
-
-    private const AUTHORIZED_AMOUNT = 'authorized_amount';
-
-    private const CAPTURE_ID = 'capture_id';
+    private const
+        ORDER_ID = 'order_id',
+        STATUS = 'status',
+        ORDER_EXPIRY_TIME = 'order_expiry_time',
+        PAYMENT_TYPE = 'payment_type',
+        AUTO_CAPTURED = 'auto_captured',
+        AUTHORIZED_AMOUNT = 'authorized_amount',
+        CAPTURE_ID = 'capture_id';
 
     /**
      * @var string|null
@@ -59,42 +54,64 @@ class AuthoriseOrderResponse extends ClientResponse
      */
     private $captureId;
 
+    /**
+     * @return string|null
+     */
     public function getOrderId(): ?string
     {
         return $this->orderId;
     }
 
+    /**
+     * @return string|null
+     */
     public function getOrderStatus(): ?string
     {
         return $this->orderStatus;
     }
 
+    /**
+     * @return DateTimeImmutable|null
+     */
     public function getOrderExpiryTime(): ?DateTimeImmutable
     {
         return $this->orderExpiryTime;
     }
 
+    /**
+     * @return string|null
+     */
     public function getPaymentType(): ?string
     {
         return $this->paymentType;
     }
 
+    /**
+     * @return bool
+     */
     public function getAutoCaptured(): bool
     {
         return $this->autoCaptured ?? false;
     }
 
+    /**
+     * @return Money|null
+     */
     public function getAuthorizedAmount(): ?Money
     {
         return $this->authorizedAmount;
     }
 
+    /**
+     * @return string|null
+     */
     public function getCaptureId(): ?string
     {
         return $this->captureId;
     }
 
     /**
+     * @param array $responseData
      * @throws \Exception
      */
     protected function parse(array $responseData): void
