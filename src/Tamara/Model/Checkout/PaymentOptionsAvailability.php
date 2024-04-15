@@ -1,6 +1,6 @@
 <?php
 
-declare (strict_types=1);
+declare(strict_types=1);
 
 namespace Tamara\Model\Checkout;
 
@@ -8,11 +8,13 @@ use Tamara\Model\Money;
 
 class PaymentOptionsAvailability
 {
+    public const COUNTRY = 'country';
 
-    public const COUNTRY = 'country',
-        ORDER_VALUE = 'order_value',
-        PHONE_NUMBER = 'phone_number',
-        IS_VIP = 'is_vip';
+    public const ORDER_VALUE = 'order_value';
+
+    public const PHONE_NUMBER = 'phone_number';
+
+    public const IS_VIP = 'is_vip';
 
     /**
      * @var string
@@ -34,12 +36,6 @@ class PaymentOptionsAvailability
      */
     private $isVip;
 
-    /**
-     * @param string $country
-     * @param Money $orderValue
-     * @param string $phoneNumber
-     * @param bool $isVip
-     */
     public function __construct(string $country, Money $orderValue, string $phoneNumber, bool $isVip = true)
     {
         $this->country = $country;
@@ -48,47 +44,32 @@ class PaymentOptionsAvailability
         $this->isVip = $isVip;
     }
 
-    /**
-     * @return array
-     */
-    public function toArray()
+    public function toArray(): array
     {
         return [
-            self::COUNTRY      => $this->getCountry(),
-            self::ORDER_VALUE  => $this->getOrderValue()->toArray(),
+            self::COUNTRY => $this->getCountry(),
+            self::ORDER_VALUE => $this->getOrderValue()->toArray(),
             self::PHONE_NUMBER => $this->getPhoneNumber(),
-            self::IS_VIP       => $this->isVip()
+            self::IS_VIP => $this->isVip(),
         ];
     }
 
-    /**
-     * @return string
-     */
-    public function getCountry()
+    public function getCountry(): string
     {
         return $this->country;
     }
 
-    /**
-     * @return Money
-     */
-    public function getOrderValue()
+    public function getOrderValue(): Money
     {
         return $this->orderValue;
     }
 
-    /**
-     * @return string
-     */
-    public function getPhoneNumber()
+    public function getPhoneNumber(): string
     {
         return $this->phoneNumber;
     }
 
-    /**
-     * @return bool
-     */
-    public function isVip()
+    public function isVip(): bool
     {
         return $this->isVip;
     }

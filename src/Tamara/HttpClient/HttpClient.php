@@ -24,11 +24,6 @@ class HttpClient
      */
     private $transport;
 
-    /**
-     * @param string          $apiUrl
-     * @param string          $apiToken
-     * @param ClientInterface $transport
-     */
     public function __construct(
         string $apiUrl,
         string $apiToken,
@@ -40,10 +35,6 @@ class HttpClient
     }
 
     /**
-     * @param string $path
-     * @param array  $params
-     *
-     * @return ResponseInterface
      * @throws ClientExceptionInterface
      * @throws RequestException
      */
@@ -53,10 +44,6 @@ class HttpClient
     }
 
     /**
-     * @param string $path
-     * @param array  $params
-     *
-     * @return ResponseInterface
      * @throws ClientExceptionInterface
      */
     public function put(string $path, array $params = []): ResponseInterface
@@ -65,10 +52,6 @@ class HttpClient
     }
 
     /**
-     * @param string $path
-     * @param array  $params
-     *
-     * @return ResponseInterface
      * @throws ClientExceptionInterface
      */
     public function post(string $path, array $params = []): ResponseInterface
@@ -77,10 +60,6 @@ class HttpClient
     }
 
     /**
-     * @param string $path
-     * @param array  $params
-     *
-     * @return ResponseInterface
      * @throws ClientExceptionInterface
      */
     public function delete(string $path, array $params = []): ResponseInterface
@@ -89,22 +68,17 @@ class HttpClient
     }
 
     /**
-     * @param string $method
-     * @param string $path
-     * @param array  $params
-     *
-     * @return null|ResponseInterface
      * @throws ClientExceptionInterface|RequestException
      */
     private function request(string $method, string $path, array $params = []): ?ResponseInterface
     {
-        if ('GET' === $method) {
+        if ($method === 'GET') {
             $path = $this->prepareQueryString($path, $params);
         }
 
         $headers = [
-            'User-Agent'    => sprintf('Tamara Client SDK %s, PHP version %s', Client::VERSION, phpversion()),
-            'Content-Type'  => 'application/json',
+            'User-Agent' => sprintf('Tamara Client SDK %s, PHP version %s', Client::VERSION, phpversion()),
+            'Content-Type' => 'application/json',
             'Authorization' => sprintf('Bearer %s', $this->apiToken),
         ];
 
@@ -132,29 +106,18 @@ class HttpClient
         return null;
     }
 
-    /**
-     * @param string $path
-     *
-     * @return string
-     */
     private function prepareUrl(string $path): string
     {
-        return $this->apiUrl . '/' . ltrim($path, '/');
+        return $this->apiUrl.'/'.ltrim($path, '/');
     }
 
-    /**
-     * @param string $path
-     * @param array  $params
-     *
-     * @return string
-     */
     private function prepareQueryString(string $path, array $params = []): string
     {
-        if (!$params) {
+        if (! $params) {
             return $path;
         }
 
-        $path .= false === strpos($path, '?') ? '?' : '&';
+        $path .= strpos($path, '?') === false ? '?' : '&';
         $path .= http_build_query($params, '', '&');
 
         return $path;

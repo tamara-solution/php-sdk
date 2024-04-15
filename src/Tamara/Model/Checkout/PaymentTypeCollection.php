@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Tamara\Model\Checkout;
@@ -9,13 +10,15 @@ use IteratorAggregate;
 use Tamara\Model\Money;
 use Tamara\Model\Order\Order;
 
-class PaymentTypeCollection implements IteratorAggregate, Countable
+class PaymentTypeCollection implements Countable, IteratorAggregate
 {
-    private const
-        NAME = 'name',
-        DESCRIPTION = 'description',
-        MIN_LIMIT = 'min_limit',
-        MAX_LIMIT = 'max_limit';
+    private const NAME = 'name';
+
+    private const DESCRIPTION = 'description';
+
+    private const MIN_LIMIT = 'min_limit';
+
+    private const MAX_LIMIT = 'max_limit';
 
     /**
      * @var array|PaymentType[]
@@ -25,7 +28,7 @@ class PaymentTypeCollection implements IteratorAggregate, Countable
     public function __construct(array $paymentTypes)
     {
         $zeroDefault = [
-            Money::AMOUNT   => 0.0,
+            Money::AMOUNT => 0.0,
             Money::CURRENCY => 'SAR',
         ];
 
@@ -49,7 +52,7 @@ class PaymentTypeCollection implements IteratorAggregate, Countable
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function count(): int
     {
@@ -59,12 +62,12 @@ class PaymentTypeCollection implements IteratorAggregate, Countable
     private function parseSupportedInstalments(array $data): array
     {
         $zeroDefault = [
-            Money::AMOUNT   => 0.0,
+            Money::AMOUNT => 0.0,
             Money::CURRENCY => 'SAR',
         ];
 
         $result = [];
-        if (isset($data[PaymentType::SUPPORTED_INSTALMENTS]) && !empty($data[PaymentType::SUPPORTED_INSTALMENTS])) {
+        if (isset($data[PaymentType::SUPPORTED_INSTALMENTS]) && ! empty($data[PaymentType::SUPPORTED_INSTALMENTS])) {
             foreach ($data[PaymentType::SUPPORTED_INSTALMENTS] as $item) {
                 $minLimit = $item[self::MIN_LIMIT] ?? $zeroDefault;
                 $maxLimit = $item[self::MAX_LIMIT] ?? $zeroDefault;

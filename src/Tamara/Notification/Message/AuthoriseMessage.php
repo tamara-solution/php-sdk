@@ -9,6 +9,7 @@ use Tamara\Notification\AbstractMessage;
 class AuthoriseMessage extends AbstractMessage
 {
     private const ORDER_STATUS = 'order_status';
+
     /**
      * @var string
      */

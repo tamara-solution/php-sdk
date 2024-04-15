@@ -6,9 +6,9 @@ namespace Tamara\Model;
 
 class Money
 {
-    public const
-        AMOUNT = 'amount',
-        CURRENCY = 'currency';
+    public const AMOUNT = 'amount';
+
+    public const CURRENCY = 'currency';
 
     /**
      * @var float
@@ -36,26 +36,17 @@ class Money
         return $this->currency;
     }
 
-    /**
-     * @param float $amount
-     */
     public function setAmount(float $amount): void
     {
         $this->amount = $amount;
     }
 
-    /**
-     * @param string $currency
-     */
     public function setCurrency(string $currency): void
     {
         $this->currency = $currency;
     }
 
-    /**
-     * @return array
-     */
-    public function toArray()
+    public function toArray(): array
     {
         return [
             self::AMOUNT => $this->getAmount(),
@@ -63,11 +54,7 @@ class Money
         ];
     }
 
-    /**
-     * @param array $data
-     * @return Money
-     */
-    public static function fromArray(array $data)
+    public static function fromArray(array $data): Money
     {
         return new self(
             (float) $data[self::AMOUNT],

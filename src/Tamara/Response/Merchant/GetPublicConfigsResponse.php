@@ -1,6 +1,6 @@
 <?php
 
-declare (strict_types=1);
+declare(strict_types=1);
 
 namespace Tamara\Response\Merchant;
 
@@ -14,17 +14,11 @@ class GetPublicConfigsResponse extends ClientResponse
      */
     private $merchant;
 
-    /**
-     * @return Merchant|null
-     */
     public function getMerchant(): ?Merchant
     {
         return $this->merchant;
     }
 
-    /**
-     * @param array $responseData
-     */
     protected function parse(array $responseData): void
     {
         $this->merchant = Merchant::fromArray($responseData);

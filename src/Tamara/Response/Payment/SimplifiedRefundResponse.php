@@ -40,33 +40,21 @@ class SimplifiedRefundResponse extends ClientResponse
      */
     private $refundedAmount;
 
-    /**
-     * @return string|null
-     */
     public function getOrderId(): ?string
     {
         return $this->orderId;
     }
 
-    /**
-     * @return string|null
-     */
     public function getComment(): ?string
     {
         return $this->comment;
     }
 
-    /**
-     * @return string|null
-     */
     public function getRefundId(): ?string
     {
         return $this->refundId;
     }
 
-    /**
-     * @return string|null
-     */
     public function getCaptureId(): ?string
     {
         return $this->captureId;
@@ -82,9 +70,6 @@ class SimplifiedRefundResponse extends ClientResponse
         return $this->refundedAmount;
     }
 
-    /**
-     * @param array $responseData
-     */
     protected function parse(array $responseData): void
     {
         $this->orderId = $responseData[SimplifiedRefund::ORDER_ID];

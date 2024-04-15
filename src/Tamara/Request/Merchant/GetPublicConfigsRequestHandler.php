@@ -12,12 +12,10 @@ class GetPublicConfigsRequestHandler extends AbstractRequestHandler
     private const MERCHANT_CONFIGS_ENDPOINT = '/merchants/configs';
 
     /**
-     * @param GetPublicConfigsRequest $request
-     * @return GetPublicConfigsResponse
      * @throws \Psr\Http\Client\ClientExceptionInterface
      * @throws \Tamara\Exception\RequestException
      */
-    public function __invoke(GetPublicConfigsRequest $request)
+    public function __invoke(GetPublicConfigsRequest $request): GetPublicConfigsResponse
     {
         $response = $this->httpClient->get(
             self::MERCHANT_CONFIGS_ENDPOINT

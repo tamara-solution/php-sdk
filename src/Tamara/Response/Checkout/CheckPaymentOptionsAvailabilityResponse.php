@@ -8,9 +8,10 @@ use Tamara\Response\ClientResponse;
 
 class CheckPaymentOptionsAvailabilityResponse extends ClientResponse
 {
-
     public const HAS_AVAILABLE_PAYMENT_OPTIONS = 'has_available_payment_options';
+
     public const SINGLE_CHECKOUT_ENABLED = 'single_checkout_enabled';
+
     public const AVAILABLE_PAYMENT_LABELS = 'available_payment_labels';
 
     /**
@@ -28,33 +29,21 @@ class CheckPaymentOptionsAvailabilityResponse extends ClientResponse
      */
     private $availablePaymentLabels = [];
 
-    /**
-     * @return bool
-     */
-    public function hasAvailablePaymentOptions()
+    public function hasAvailablePaymentOptions(): bool
     {
         return $this->hasAvailablePaymentOptions;
     }
 
-    /**
-     * @return bool
-     */
-    public function isSingleCheckoutEnabled()
+    public function isSingleCheckoutEnabled(): bool
     {
         return $this->singleCheckoutEnabled;
     }
 
-    /**
-     * @return array
-     */
-    public function getAvailablePaymentLabels()
+    public function getAvailablePaymentLabels(): array
     {
         return $this->availablePaymentLabels;
     }
 
-    /**
-     * @param array $responseData
-     */
     protected function parse(array $responseData): void
     {
         $this->hasAvailablePaymentOptions = $responseData[self::HAS_AVAILABLE_PAYMENT_OPTIONS];
