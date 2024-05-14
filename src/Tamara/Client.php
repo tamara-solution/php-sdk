@@ -8,6 +8,7 @@ use Tamara\Request\Checkout\CreateCheckoutRequest;
 use Tamara\Request\Checkout\CreateInstoreCheckoutRequest;
 use Tamara\Request\Checkout\GetPaymentTypesRequest;
 use Tamara\Request\Checkout\GetPaymentTypesV2Request;
+use Tamara\Request\Checkout\VoidCheckoutSessionRequest;
 use Tamara\Request\Merchant\GetPublicConfigsRequest;
 use Tamara\Request\Order\AuthoriseOrderRequest;
 use Tamara\Request\Order\CancelOrderRequest;
@@ -26,6 +27,7 @@ use Tamara\Response\Checkout\CheckPaymentOptionsAvailabilityResponse;
 use Tamara\Response\Checkout\CreateCheckoutResponse;
 use Tamara\Response\Checkout\CreateInstoreCheckoutResponse;
 use Tamara\Response\Checkout\GetPaymentTypesResponse;
+use Tamara\Response\Checkout\VoidCheckoutSessionResponse;
 use Tamara\Response\Merchant\GetPublicConfigsResponse;
 use Tamara\Response\Order\AuthoriseOrderResponse;
 use Tamara\Response\Order\GetOrderByReferenceIdResponse;
@@ -286,5 +288,15 @@ class Client
     public function createInstoreCheckout(CreateInstoreCheckoutRequest $createInstoreCheckoutRequest): CreateInstoreCheckoutResponse
     {
         return $this->requestDispatcher->dispatch($createInstoreCheckoutRequest);
+    }
+
+    /**
+     * @param VoidCheckoutSessionRequest $voidCheckoutSessionRequest
+     * @return VoidCheckoutSessionResponse
+     * @throws Exception\RequestDispatcherException
+     */
+    public function voidCheckoutSession(VoidCheckoutSessionRequest $voidCheckoutSessionRequest): VoidCheckoutSessionResponse
+    {
+        return $this->requestDispatcher->dispatch($voidCheckoutSessionRequest);
     }
 }
